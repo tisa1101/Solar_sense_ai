@@ -3,13 +3,15 @@ import { useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { UserRole } from '../types';
-import { ShieldCheck, Sun, Moon, ExternalLink, Activity } from 'lucide-react';
+import { ShieldCheck, Sun, Moon, ExternalLink, Activity, Palette } from 'lucide-react';
 import { NotificationBell } from './NotificationBell';
+import { useThemeEngine } from '../context/ThemeEngineContext';
 
 export const Navbar: React.FC = () => {
   const location = useLocation();
   const { user } = useAuth();
   const { theme, toggleTheme } = useTheme();
+  const { toggleStudio } = useThemeEngine();
 
   const getPageTitle = (path: string) => {
     if (path.startsWith('/solar/inquiries')) return 'Scene 1: Rooftop Inquiries & Feasibility Survey';
@@ -56,6 +58,17 @@ export const Navbar: React.FC = () => {
       </div>
 
       <div className="flex items-center gap-3">
+        {/* MIRA Studio Theme Customizer Pill */}
+        <button
+          onClick={toggleStudio}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/12 text-white text-xs font-mono font-bold uppercase tracking-wider transition-all cursor-pointer shadow-sm"
+          title="Open MIRA Endless Theme Customizer"
+        >
+          <Palette className="w-3.5 h-3.5 text-[#FF2E93]" />
+          <span className="hidden md:inline">MIRA Studio</span>
+          <span className="text-[10px] bg-[#FF2E93]/20 text-[#FF2E93] px-1.5 py-0.2 rounded-full border border-[#FF2E93]/30">6</span>
+        </button>
+
         {/* Customer Portal Shortcut */}
         <Link
           to="/portal"

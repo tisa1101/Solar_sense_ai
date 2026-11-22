@@ -1,14 +1,16 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { ChevronDown, Menu, X, Sun, Shield, UserCheck, ArrowRight, Sparkles } from 'lucide-react';
+import { ChevronDown, Menu, X, Sun, Shield, UserCheck, ArrowRight, Sparkles, Palette } from 'lucide-react';
 import { CompanyLogo } from '../components/CompanyLogo';
+import { useThemeEngine } from '../context/ThemeEngineContext';
 
 export const LandingNavbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [portalMenuOpen, setPortalMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const { toggleStudio, currentTheme } = useThemeEngine();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -99,7 +101,18 @@ export const LandingNavbar: React.FC = () => {
           </nav>
 
           {/* Right Action Buttons */}
-          <div className="hidden sm:flex items-center gap-4">
+          <div className="hidden sm:flex items-center gap-3">
+            {/* MIRA Studio Theme Customizer Pill */}
+            <button
+              onClick={toggleStudio}
+              className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-mono font-bold uppercase tracking-wider text-white bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 hover:border-[#FF2E93]/40 transition-all cursor-pointer shadow-sm"
+              title="Open MIRA Endless Theme Customizer"
+            >
+              <Palette className="w-3.5 h-3.5 text-[#FF2E93]" />
+              <span className="hidden xl:inline">MIRA Studio</span>
+              <span className="text-[10px] bg-[#FF2E93]/20 text-[#FF2E93] px-1.5 py-0.2 rounded-full border border-[#FF2E93]/30">6</span>
+            </button>
+
             {/* Portal Switcher Dropdown */}
             <div className="relative">
               <button

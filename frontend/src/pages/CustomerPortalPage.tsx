@@ -9,6 +9,7 @@ import { InteractiveEnergyFlow } from '../components/InteractiveEnergyFlow';
 import { AiSolarIntelligence } from '../components/AiSolarIntelligence';
 import { AiRoofPhotoIntelligence } from '../components/AiRoofPhotoIntelligence';
 import { CompanyLogo } from '../components/CompanyLogo';
+import { useThemeEngine } from '../context/ThemeEngineContext';
 import {
   Sun,
   ShieldCheck,
@@ -34,10 +35,12 @@ import {
   ChevronDown,
   UserCheck,
   Sparkles,
-  Camera
+  Camera,
+  Palette
 } from 'lucide-react';
 
 export const CustomerPortalPage: React.FC = () => {
+  const { toggleStudio } = useThemeEngine();
   const [project, setProject] = useState<CustomerPortalData | null>(null);
   const [allProjects, setAllProjects] = useState<CustomerPortalData[]>([]);
   const [packages, setPackages] = useState<SolarPackageTemplate[]>([]);
@@ -249,6 +252,17 @@ export const CustomerPortalPage: React.FC = () => {
                 </select>
               </div>
             </div>
+
+            {/* MIRA Studio Theme Customizer Pill */}
+            <button
+              onClick={toggleStudio}
+              className="flex items-center gap-1.5 px-3 py-2 bg-white/[0.06] hover:bg-white/[0.12] text-white border border-white/15 rounded-full text-xs font-mono font-bold uppercase tracking-wider transition-all cursor-pointer shadow-sm"
+              title="Open MIRA Endless Theme Customizer"
+            >
+              <Palette className="w-3.5 h-3.5 text-[#FF2E93]" />
+              <span className="hidden md:inline">MIRA Studio</span>
+              <span className="text-[10px] bg-[#FF2E93]/20 text-[#FF2E93] px-1.5 py-0.2 rounded-full border border-[#FF2E93]/30">6</span>
+            </button>
 
             <Link
               to="/portal/login"
