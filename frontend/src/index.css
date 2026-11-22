@@ -1,0 +1,651 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Plus+Jakarta+Sans:wght@600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+:root {
+  /* =========================================================
+     FROSTED DARK ORCHID & ROSE GLASSMORPHISM THEME TOKENS
+     (Inspired by reference media_1795313056039_734ef12c.jpg)
+     ========================================================= */
+  --orchid-bg: #0A0713;
+  --orchid-bg-surface: rgba(22, 16, 36, 0.7);
+  --orchid-glass: rgba(255, 255, 255, 0.05);
+  --orchid-glass-hover: rgba(255, 255, 255, 0.09);
+  --orchid-border: rgba(255, 255, 255, 0.12);
+  --orchid-border-subtle: rgba(255, 255, 255, 0.06);
+
+  --rose-primary: #E284B3;
+  --rose-light: #F4A5C6;
+  --rose-glow: rgba(226, 132, 179, 0.35);
+  --orchid-purple: #8A56E2;
+  --orchid-light: #B668D8;
+  --peach-warm: #F5B895;
+
+  --text-pure: #FFFFFF;
+  --text-lavender: #D5CEE0;
+  --text-mauve: #A79FB6;
+  --text-muted-violet: #7E758D;
+
+  /* Universal Remapped Tokens for Seamless Component Inheritance */
+  --ti-midnight: #0A0713;
+  --ti-navy: #150F24;
+  --ti-orange: #F4A5C6;
+  --ti-blue: #B668D8;
+  --ti-text-white: #FFFFFF;
+  --ti-text-muted: #A79FB6;
+  --ti-text-body: #D5CEE0;
+  --ti-border: rgba(255, 255, 255, 0.12);
+  --ti-border-subtle: rgba(255, 255, 255, 0.06);
+
+  /* GTA VI / Vice City Color System */
+  --vice-pink: #E284B3;
+  --vice-pink-glow: rgba(226, 132, 179, 0.4);
+  --vice-orange: #F5B895;
+  --vice-coral: #F4A5C6;
+  --vice-gold: #FFD166;
+  --vice-purple: #8A56E2;
+  --vice-cyan: #B668D8;
+  --vice-midnight: #0A0713;
+  --vice-dark: #150F24;
+  --vice-card: rgba(255, 255, 255, 0.05);
+  --vice-card-hover: rgba(255, 255, 255, 0.09);
+  --vice-border: rgba(255, 255, 255, 0.12);
+  --vice-border-glow: rgba(226, 132, 179, 0.35);
+
+  /* Font Families */
+  --ti-mono: "Space Mono", monospace;
+  --ti-sans: "Work Sans", sans-serif;
+  --body-font: "Work Sans", sans-serif;
+  --display-font: "Work Sans", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-[#0A0713] text-[#D5CEE0] antialiased selection:bg-[#E284B3] selection:text-white;
+    font-family: var(--body-font);
+    background-color: var(--orchid-bg);
+  }
+
+  h1, h2, h3, .cinematic-title {
+    font-family: var(--display-font);
+    letter-spacing: -0.02em;
+  }
+}
+
+/* =========================================================
+   FROSTED GLASSMORPHISM SIGNATURE UTILITIES
+   ========================================================= */
+
+/* Liquid Glass Cards with generous smooth rounding */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.75rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45), inset 0 1px 1px rgba(255, 255, 255, 0.12);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel:hover {
+  border-color: rgba(244, 165, 198, 0.35);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.55), 0 0 32px rgba(226, 132, 179, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+/* Floating Frosted Glass Dock */
+.glass-dock {
+  background: rgba(20, 15, 34, 0.82);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65), 0 0 40px rgba(138, 86, 226, 0.12);
+}
+
+/* Rose & Orchid Glowing Gradient Text */
+.rose-orchid-gradient-text {
+  background: linear-gradient(135deg, #F4A5C6 0%, #D875B7 45%, #8A56E2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.peach-rose-gradient-text {
+  background: linear-gradient(135deg, #FFD166 0%, #F5B895 50%, #E284B3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Ambient Backlight Glows */
+.ambient-orchid-glow {
+  background: radial-gradient(circle at 50% -10%, rgba(226, 132, 179, 0.2) 0%, rgba(138, 86, 226, 0.12) 40%, transparent 75%);
+}
+
+.ambient-bottom-glow {
+  background: radial-gradient(circle at 50% 110%, rgba(138, 86, 226, 0.18) 0%, rgba(226, 132, 179, 0.1) 40%, transparent 70%);
+}
+
+/* Glass Pill Buttons */
+.glass-btn-primary {
+  background: linear-gradient(135deg, #E284B3 0%, #B668D8 50%, #8A56E2 100%);
+  color: #FFFFFF;
+  font-weight: 700;
+  border-radius: 9999px;
+  padding: 0.75rem 1.75rem;
+  box-shadow: 0 6px 24px rgba(226, 132, 179, 0.35);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.glass-btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 32px rgba(226, 132, 179, 0.5), 0 0 24px rgba(182, 104, 216, 0.4);
+  filter: brightness(1.06);
+}
+
+.glass-btn-secondary {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  border-radius: 9999px;
+  padding: 0.75rem 1.75rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.glass-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(244, 165, 198, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Glass Input Fields */
+.glass-input {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 1rem;
+  color: #FFFFFF;
+  padding: 0.75rem 1.1rem;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.glass-input:focus {
+  border-color: #E284B3;
+  box-shadow: 0 0 0 3px rgba(226, 132, 179, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* =========================================================
+   GTA VI / VICE CITY SIGNATURE UTILITIES & DESIGN SYSTEM
+   ========================================================= */
+
+/* Vice City Sunset Gradient Text */
+.text-vice-gradient {
+  background: linear-gradient(135deg, #FF2E93 0%, #FF7A00 55%, #FFD600 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-vice-cyan-gradient {
+  background: linear-gradient(135deg, #00F0FF 0%, #7928CA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Vice City Ambient Horizon Glow */
+.vice-sunset-glow {
+  background: radial-gradient(circle at 50% -20%, rgba(255, 46, 147, 0.22) 0%, rgba(255, 122, 0, 0.14) 40%, transparent 75%);
+}
+
+.vice-twilight-glow {
+  background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(121, 40, 202, 0.25) 0%, rgba(255, 46, 147, 0.15) 50%, transparent 80%);
+}
+
+/* Cinematic Glassmorphism HUD Card */
+.vice-card {
+  background-color: rgba(18, 24, 42, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.25rem;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.vice-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 46, 147, 0.45);
+  box-shadow: 0 16px 36px rgba(255, 46, 147, 0.15), 0 0 24px rgba(255, 122, 0, 0.1);
+}
+
+/* Primary Sunset Button */
+.vice-btn-primary {
+  background: linear-gradient(135deg, #FF2E93 0%, #FF7A00 100%);
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 0.813rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.85rem 1.75rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 0 24px rgba(255, 46, 147, 0.45), 0 4px 12px rgba(0, 0, 0, 0.5);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.vice-btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 0 32px rgba(255, 46, 147, 0.65), 0 6px 16px rgba(0, 0, 0, 0.6);
+  filter: brightness(1.08);
+}
+
+/* Secondary Neon Outline Button */
+.vice-btn-outline {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 46, 147, 0.4);
+  color: #F8FAFC;
+  font-weight: 700;
+  font-size: 0.813rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.85rem 1.75rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.35s ease;
+  cursor: pointer;
+}
+
+.vice-btn-outline:hover {
+  background: rgba(255, 46, 147, 0.12);
+  border-color: #FF2E93;
+  color: #FFFFFF;
+  box-shadow: 0 0 20px rgba(255, 46, 147, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Section Title & Subtitle */
+.vice-subtitle {
+  font-size: 0.75rem;
+  color: #FF7A00;
+  font-family: var(--display-font);
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.vice-title {
+  font-size: 2rem;
+  color: #F8FAFC;
+  font-family: var(--display-font);
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .vice-title {
+    font-size: 2.75rem;
+  }
+}
+
+/* Pill Navigation */
+.vice-nav-pill {
+  padding: 0.6rem 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 9999px;
+  color: #94A3B8;
+  background-color: rgba(18, 24, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.vice-nav-pill.active {
+  background: linear-gradient(135deg, #FF2E93 0%, #FF7A00 100%);
+  color: #FFFFFF;
+  font-weight: 800;
+  border-color: transparent;
+  box-shadow: 0 0 20px rgba(255, 46, 147, 0.5);
+}
+
+.vice-nav-pill:hover:not(.active) {
+  color: #FFFFFF;
+  background-color: rgba(24, 32, 56, 0.95);
+  border-color: rgba(255, 46, 147, 0.3);
+}
+
+/* Backwards compatibility classes for Customer Portal */
+.hailee-portal {
+  background-color: #060812;
+  color: #CBD5E1;
+}
+
+.hailee-subtitle {
+  font-size: 0.75rem;
+  color: #FF7A00;
+  font-family: var(--display-font);
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  display: block;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.hailee-title {
+  font-size: 1.75rem;
+  color: #F8FAFC;
+  font-family: var(--display-font);
+  font-weight: 900;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.hailee-card {
+  background-color: rgba(18, 24, 42, 0.85);
+  backdrop-filter: blur(16px);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.hailee-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 46, 147, 0.45);
+  box-shadow: 0 16px 36px rgba(255, 46, 147, 0.15), 0 0 24px rgba(255, 122, 0, 0.1);
+}
+
+.hailee-btn {
+  background: linear-gradient(135deg, #FF2E93 0%, #FF7A00 100%);
+  color: #FFFFFF;
+  padding: 0.75rem 1.4rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.813rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 0 20px rgba(255, 46, 147, 0.4);
+  transition: all 0.35s ease;
+  cursor: pointer;
+}
+
+.hailee-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 28px rgba(255, 46, 147, 0.6);
+  filter: brightness(1.1);
+}
+
+.hailee-btn-ghost {
+  border: 1px solid rgba(255, 46, 147, 0.5);
+  color: #F8FAFC;
+  background-color: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  padding: 0.75rem 1.4rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.813rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.35s ease;
+  cursor: pointer;
+}
+
+.hailee-btn-ghost:hover {
+  background-color: rgba(255, 46, 147, 0.12);
+  border-color: #FF2E93;
+  transform: translateY(-2px);
+}
+
+.hailee-nav-pill {
+  padding: 0.6rem 1.25rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: 9999px;
+  color: #94A3B8;
+  background-color: rgba(18, 24, 42, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.hailee-nav-pill.active {
+  background: linear-gradient(135deg, #FF2E93 0%, #FF7A00 100%);
+  color: #FFFFFF;
+  font-weight: 800;
+  border-color: transparent;
+  box-shadow: 0 0 20px rgba(255, 46, 147, 0.5);
+}
+
+/* =========================================================
+   FROSTED GLASS ARCHITECTURAL TOKENS (IMAGE THEME)
+   ========================================================= */
+
+.font-space-mono {
+  font-family: var(--ti-mono);
+}
+
+.font-work-sans {
+  font-family: var(--ti-sans);
+}
+
+/* Frosted Glass Dropdown & Select */
+.ti-dropdown {
+  background: rgba(20, 15, 34, 0.92);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1.25rem !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 30px rgba(226, 132, 179, 0.1);
+}
+
+.ti-select {
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 9999px !important;
+  color: #FFFFFF;
+  font-family: var(--body-font);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 0.55rem 1.1rem;
+  transition: all 0.25s ease;
+  outline: none;
+}
+
+.ti-select:focus {
+  border-color: #E284B3;
+  box-shadow: 0 0 0 3px rgba(226, 132, 179, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.ti-dropdown-item {
+  font-family: var(--body-font);
+  font-size: 0.78rem;
+  color: #D5CEE0;
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ti-dropdown-item:hover {
+  background: rgba(226, 132, 179, 0.15);
+  color: #FFFFFF;
+}
+
+/* Frosted Stadium Pill Badge (Story in Numbers) */
+.ti-pill {
+  border-radius: 9999px !important;
+  background: linear-gradient(135deg, rgba(226, 132, 179, 0.25) 0%, rgba(138, 86, 226, 0.2) 100%);
+  border: 1px solid rgba(244, 165, 198, 0.35);
+  backdrop-filter: blur(16px);
+  color: #FFFFFF;
+  font-family: var(--body-font);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  padding: 0.4rem 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 18px rgba(226, 132, 179, 0.25);
+}
+
+/* Frosted Chip Badge */
+.ti-chip {
+  border-radius: 9999px !important;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #F4A5C6;
+  font-family: var(--body-font);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 0.35rem 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  transition: all 0.25s ease;
+}
+
+.ti-chip:hover {
+  border-color: rgba(244, 165, 198, 0.45);
+  background: rgba(255, 255, 255, 0.12);
+  color: #FFFFFF;
+}
+
+/* Frosted Glass Luxury Card */
+.ti-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.5rem !important;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ti-card:hover {
+  border-color: rgba(244, 165, 198, 0.3);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5), 0 0 32px rgba(226, 132, 179, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.18);
+}
+
+/* Input Fields (Frosted Glass with Rounded Pill Feel) */
+.ti-input {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1rem !important;
+  color: #FFFFFF;
+  font-family: var(--body-font);
+  font-size: 0.813rem;
+  padding: 0.65rem 1rem;
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+.ti-input:focus {
+  border-color: #E284B3;
+  box-shadow: 0 0 0 3px rgba(226, 132, 179, 0.2);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Editorial Underlined Link + 45 Degree Arrow */
+.ti-link {
+  font-family: var(--body-font);
+  font-weight: 700;
+  font-size: 0.813rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #FFFFFF;
+  border-bottom: 1.5px solid rgba(226, 132, 179, 0.6);
+  padding-bottom: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.ti-link:hover {
+  color: #F4A5C6;
+  border-color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+/* Large Metric Numbers (Rose-Orchid Gradient) */
+.ti-stat-number {
+  font-family: var(--body-font);
+  color: #FFFFFF;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* Eyebrow Label */
+.ti-eyebrow {
+  font-family: var(--body-font);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #F4A5C6;
+  display: block;
+}
+
+/* Watermark Background Typography */
+.ti-watermark {
+  font-family: var(--body-font);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 10px;
+  color: rgba(255, 255, 255, 0.025);
+  user-select: none;
+  pointer-events: none;
+}
+
+
+.hailee-nav-pill:hover:not(.active) {
+  color: #FFFFFF;
+  background-color: rgba(24, 32, 56, 0.95);
+  border-color: rgba(255, 46, 147, 0.3);
+}
