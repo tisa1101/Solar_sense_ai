@@ -8,6 +8,7 @@ import { SolarScrollCanvas } from '../components/SolarScrollCanvas';
 import { InteractiveEnergyFlow } from '../components/InteractiveEnergyFlow';
 import { AiSolarIntelligence } from '../components/AiSolarIntelligence';
 import { AiRoofPhotoIntelligence } from '../components/AiRoofPhotoIntelligence';
+import { CompanyLogo } from '../components/CompanyLogo';
 import {
   Sun,
   ShieldCheck,
@@ -218,24 +219,12 @@ export const CustomerPortalPage: React.FC = () => {
       {/* Top Header Navigation (Frosted Glass Luxury) */}
       <header className="sticky top-0 z-50 bg-[#0D0917]/75 backdrop-blur-3xl border-b border-white/10 transition-all shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-          {/* Brand Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-[#E284B3] via-[#B668D8] to-[#8A56E2] flex items-center justify-center text-white shadow-[0_0_24px_rgba(226,132,179,0.45)] group-hover:scale-105 transition-transform font-bold text-sm tracking-wider">
-              <Sun className="w-5 h-5 fill-white text-white" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-bold text-base sm:text-lg tracking-[1.5px] text-white uppercase">
-                  SOLARSENSE
-                </span>
-                <span className="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-[#E284B3]/20 text-[#F4A5C6] border border-[#E284B3]/35 uppercase tracking-wider">
-                  PORTAL
-                </span>
-              </div>
-              <span className="text-[11px] text-[#A79FB6] tracking-wider block font-light">
-                Clean Energy Vault &amp; Telemetry
-              </span>
-            </div>
+          {/* Brand Logo with GTA VI Solar Crest */}
+          <Link to="/" className="flex items-center gap-3">
+            <CompanyLogo size="md" subtitle="CLEAN ENERGY VAULT" />
+            <span className="hidden sm:inline-block text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-[#FF2E93]/20 text-[#FF2E93] border border-[#FF2E93]/35 uppercase tracking-wider font-mono">
+              PORTAL
+            </span>
           </Link>
 
           {/* Quick Actions & Architectural Dropdown List (Trilogy Style) */}

@@ -13,10 +13,13 @@ import {
   Sun,
   Layers,
   CheckCircle2,
-  AlertCircle
+  AlertCircle,
+  Sparkles,
+  Zap
 } from 'lucide-react';
 import { solarApi } from '../services/solarApi';
 import { DirectorAnalytics, JobProfitabilityItem } from '../types/solar';
+import { CompanyLogo } from '../components/CompanyLogo';
 
 export const SolarDirectorPage: React.FC = () => {
   const [analytics, setAnalytics] = useState<DirectorAnalytics | null>(null);
@@ -79,45 +82,45 @@ export const SolarDirectorPage: React.FC = () => {
       {
         projectId: 2,
         projectNumber: 'SP-2026-002',
-        customerName: 'Anita Deshmukh',
-        capacityKw: 3,
-        systemType: 1,
-        contractRevenue: 195000,
-        hardwareBomCost: 112000,
-        technicianLaborCost: 24000,
-        miscCost: 7500,
-        netProfit: 51500,
-        marginPercentage: 26.41,
-        madeMoney: true,
-        subsidyStatus: 'Net Meter Synchronized (₹78,000)',
-      },
-      {
-        projectId: 3,
-        projectNumber: 'SP-2026-003',
-        customerName: 'Amit Verma',
+        customerName: 'Amit Verma (Factory)',
         capacityKw: 5,
         systemType: 2,
-        contractRevenue: 410000,
-        hardwareBomCost: 265000,
-        technicianLaborCost: 35000,
-        miscCost: 12000,
-        netProfit: 98000,
-        marginPercentage: 23.90,
+        contractRevenue: 340000,
+        hardwareBomCost: 215000,
+        technicianLaborCost: 32000,
+        miscCost: 9000,
+        netProfit: 84000,
+        marginPercentage: 24.71,
         madeMoney: true,
         subsidyStatus: 'Off-Grid (Self-Funded)',
       },
       {
+        projectId: 3,
+        projectNumber: 'SP-2026-003',
+        customerName: 'Anita Deshmukh',
+        capacityKw: 3,
+        systemType: 1,
+        contractRevenue: 195000,
+        hardwareBomCost: 114000,
+        technicianLaborCost: 18000,
+        miscCost: 6500,
+        netProfit: 56500,
+        marginPercentage: 28.97,
+        madeMoney: true,
+        subsidyStatus: 'Disbursed (₹78,000)',
+      },
+      {
         projectId: 4,
         projectNumber: 'SP-2026-004',
-        customerName: 'Apex Plastics Ltd',
+        customerName: 'Apex Precision Works',
         capacityKw: 5,
         systemType: 1,
-        contractRevenue: 340000,
-        hardwareBomCost: 198000,
+        contractRevenue: 310000,
+        hardwareBomCost: 188000,
         technicianLaborCost: 28000,
-        miscCost: 9000,
-        netProfit: 105000,
-        marginPercentage: 30.88,
+        miscCost: 8000,
+        netProfit: 86000,
+        marginPercentage: 27.74,
         madeMoney: true,
         subsidyStatus: 'Commercial (Tax Depreciation)',
       },
@@ -181,246 +184,271 @@ export const SolarDirectorPage: React.FC = () => {
       job.customerName.toLowerCase().includes(searchTerm.toLowerCase()) ||
       job.projectNumber.toLowerCase().includes(searchTerm.toLowerCase());
     if (!matchesSearch) return false;
-    if (filterType === 'profitable') return job.marginPercentage >= 25;
-    if (filterType === 'attention') return job.marginPercentage < 25;
+    if (filterType === 'profitable') return job.marginPercentage >= 28;
+    if (filterType === 'attention') return job.marginPercentage < 28;
     return true;
   });
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 p-4 sm:p-6 lg:p-8 space-y-8">
+    <div className="min-h-screen bg-[#07040E] text-[#D5CEE0] p-4 sm:p-6 lg:p-8 space-y-8 font-['Work_Sans',sans-serif] relative overflow-hidden">
+      {/* Vice City Ambient Horizon Glows */}
+      <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(circle_at_50%_-10%,rgba(255,46,147,0.18)_0%,rgba(121,40,202,0.12)_35%,transparent_70%)] z-0" />
+      <div className="fixed inset-0 pointer-events-none bg-[radial-gradient(circle_at_90%_45%,rgba(255,122,0,0.08)_0%,transparent_50%)] z-0" />
+
       {/* Top Banner / Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-6">
-        <div>
-          <div className="flex items-center gap-2 mb-1">
-            <span className="px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider bg-amber-500/10 text-amber-400 border border-amber-500/20">
-              Scene 6: The Director's Month-End
+      <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-white/10 pb-6 bg-[#0E081A]/60 p-6 rounded-3xl border backdrop-blur-2xl shadow-2xl">
+        <div className="space-y-2">
+          {/* Company Brand Logo & Eyebrow */}
+          <div className="flex items-center gap-3">
+            <CompanyLogo size="lg" subtitle="EXECUTIVE DIRECTOR DESK" />
+            <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-[#FF2E93]/15 text-[#FF2E93] border border-[#FF2E93]/30">
+              LEONIDA REGULATORY SCENE 06
             </span>
-            <span className="text-xs text-slate-500">SunPower Solutions Executive Desk</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight flex items-center gap-3">
-            <Briefcase className="w-8 h-8 text-amber-400" />
+
+          <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase font-['Plus_Jakarta_Sans',sans-serif]">
             Executive Financial & Operations Command
           </h1>
-          <p className="text-sm text-slate-400 mt-1">
-            Month-end job-level profitability (revenue vs BOM vs labor), PM Surya Ghar subsidy tracking, and 15-technician crew ledger.
+          <p className="text-xs sm:text-sm text-[#A79FB6] max-w-2xl leading-relaxed">
+            Month-end job-level profitability (revenue vs BOM vs labor), PM Surya Ghar subsidy reconciliation, and 15-technician certified crew ledger.
           </p>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <button
             onClick={() => window.print()}
-            className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 text-sm font-semibold transition-all hover:bg-slate-800"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/12 text-white text-xs font-bold uppercase tracking-wider font-mono transition-all cursor-pointer shadow-md"
           >
-            <Download className="w-4 h-4" />
+            <Download className="w-4 h-4 text-[#FF7A00]" />
             Export P&L Report
           </button>
-          <div className="px-3.5 py-2 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs font-semibold flex items-center gap-2">
-            <Sun className="w-4 h-4 text-amber-400 animate-spin-slow" />
-            Completed: {data.completedProjects} / Target: 40 Projects
+          <div className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#FF2E93]/20 to-[#FF7A00]/20 border border-[#FF2E93]/30 text-white text-xs font-bold font-mono flex items-center gap-2">
+            <Sun className="w-4 h-4 text-[#FF7A00] animate-spin" />
+            <span>Target: 40 // Completed: {data.completedProjects}</span>
           </div>
         </div>
       </div>
 
-      {/* KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* KPI Cards Grid */}
+      <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Gross Revenue */}
-        <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-xl relative overflow-hidden group hover:border-slate-700 transition-all">
-          <div className="flex items-center justify-between text-slate-400 mb-2">
-            <span className="text-xs font-semibold uppercase tracking-wider">Gross Invoiced Revenue</span>
-            <div className="p-2 rounded-xl bg-blue-500/10 text-blue-400">
+        <div className="p-6 rounded-3xl bg-[#120B1F]/80 border border-white/12 shadow-2xl backdrop-blur-2xl hover:border-[#FF2E93]/40 transition-all group">
+          <div className="flex items-center justify-between text-[#A79FB6] mb-3">
+            <span className="text-[11px] font-bold uppercase tracking-wider font-mono text-[#D5CEE0]">Gross Invoiced Revenue</span>
+            <div className="p-2.5 rounded-2xl bg-[#FF2E93]/15 text-[#FF2E93] border border-[#FF2E93]/25 group-hover:scale-110 transition-transform">
               <DollarSign className="w-5 h-5" />
             </div>
           </div>
-          <div className="text-2xl sm:text-3xl font-black text-white">
+          <div className="text-2xl sm:text-3xl font-black text-white font-['Plus_Jakarta_Sans',sans-serif]">
             ₹{data.totalRevenue.toLocaleString('en-IN')}
           </div>
-          <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-semibold mt-2">
+          <div className="flex items-center gap-1.5 text-xs text-emerald-400 font-bold mt-2 font-mono">
             <ArrowUpRight className="w-3.5 h-3.5" />
-            <span>+18.4% vs last month</span>
+            <span>+18.4% vs last cycle</span>
           </div>
         </div>
 
         {/* Total Hardware BOM Cost */}
-        <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-xl relative overflow-hidden group hover:border-slate-700 transition-all">
-          <div className="flex items-center justify-between text-slate-400 mb-2">
-            <span className="text-xs font-semibold uppercase tracking-wider">BOM Hardware Cost</span>
-            <div className="p-2 rounded-xl bg-amber-500/10 text-amber-400">
+        <div className="p-6 rounded-3xl bg-[#120B1F]/80 border border-white/12 shadow-2xl backdrop-blur-2xl hover:border-[#FF7A00]/40 transition-all group">
+          <div className="flex items-center justify-between text-[#A79FB6] mb-3">
+            <span className="text-[11px] font-bold uppercase tracking-wider font-mono text-[#D5CEE0]">BOM Hardware Cost</span>
+            <div className="p-2.5 rounded-2xl bg-[#FF7A00]/15 text-[#FF7A00] border border-[#FF7A00]/25 group-hover:scale-110 transition-transform">
               <Briefcase className="w-5 h-5" />
             </div>
           </div>
-          <div className="text-2xl sm:text-3xl font-black text-amber-300">
+          <div className="text-2xl sm:text-3xl font-black text-white font-['Plus_Jakarta_Sans',sans-serif]">
             ₹{data.totalHardwareCost.toLocaleString('en-IN')}
           </div>
-          <div className="text-xs text-slate-400 mt-2">
-            Panels, Inverters, LFP Batteries & Racks
+          <div className="text-xs text-[#A79FB6] mt-2 font-mono">
+            56.9% of gross contract value
           </div>
         </div>
 
-        {/* Technician Labor & Logistics */}
-        <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-xl relative overflow-hidden group hover:border-slate-700 transition-all">
-          <div className="flex items-center justify-between text-slate-400 mb-2">
-            <span className="text-xs font-semibold uppercase tracking-wider">Technician Labor & Travel</span>
-            <div className="p-2 rounded-xl bg-purple-500/10 text-purple-400">
+        {/* Total Labor Cost */}
+        <div className="p-6 rounded-3xl bg-[#120B1F]/80 border border-white/12 shadow-2xl backdrop-blur-2xl hover:border-[#00F0FF]/40 transition-all group">
+          <div className="flex items-center justify-between text-[#A79FB6] mb-3">
+            <span className="text-[11px] font-bold uppercase tracking-wider font-mono text-[#D5CEE0]">Technician Labor Cost</span>
+            <div className="p-2.5 rounded-2xl bg-[#00F0FF]/15 text-[#00F0FF] border border-[#00F0FF]/25 group-hover:scale-110 transition-transform">
               <Users className="w-5 h-5" />
             </div>
           </div>
-          <div className="text-2xl sm:text-3xl font-black text-white">
+          <div className="text-2xl sm:text-3xl font-black text-white font-['Plus_Jakarta_Sans',sans-serif]">
             ₹{data.totalLaborCost.toLocaleString('en-IN')}
           </div>
-          <div className="text-xs text-slate-400 mt-2">
-            {data.activeTechniciansCount} Field Technicians • 100% on-time payouts
+          <div className="text-xs text-[#A79FB6] mt-2 font-mono">
+            15 field technicians deployed
           </div>
         </div>
 
         {/* Net Operating Profit */}
-        <div className="p-5 rounded-2xl bg-gradient-to-br from-emerald-950/40 via-slate-900 to-slate-900 border border-emerald-500/30 shadow-xl relative overflow-hidden group">
-          <div className="flex items-center justify-between text-emerald-400 mb-2">
-            <span className="text-xs font-semibold uppercase tracking-wider">Net Realized Profit</span>
-            <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400">
+        <div className="p-6 rounded-3xl bg-[#120B1F]/80 border border-white/12 shadow-2xl backdrop-blur-2xl hover:border-emerald-500/40 transition-all group">
+          <div className="flex items-center justify-between text-[#A79FB6] mb-3">
+            <span className="text-[11px] font-bold uppercase tracking-wider font-mono text-[#D5CEE0]">Net Operating Profit</span>
+            <div className="p-2.5 rounded-2xl bg-emerald-500/15 text-emerald-400 border border-emerald-500/25 group-hover:scale-110 transition-transform">
               <TrendingUp className="w-5 h-5" />
             </div>
           </div>
-          <div className="text-2xl sm:text-3xl font-black text-emerald-300">
+          <div className="text-2xl sm:text-3xl font-black text-emerald-400 font-['Plus_Jakarta_Sans',sans-serif]">
             ₹{data.totalNetProfit.toLocaleString('en-IN')}
           </div>
-          <div className="flex items-center gap-2 mt-2">
-            <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300">
-              {data.averageMarginPercentage.toFixed(1)}% Net Margin
-            </span>
-            <span className="text-xs text-slate-400">Healthy</span>
+          <div className="text-xs text-[#A79FB6] mt-2 font-mono">
+            Average margin: <span className="text-white font-bold">{data.averageMarginPercentage}%</span>
           </div>
         </div>
       </div>
 
-      {/* Pipeline Velocity Tracker */}
-      <div className="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 shadow-xl space-y-3">
-        <h3 className="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
-          <Layers className="w-4 h-4 text-amber-400" />
-          Unfinished Steps Pipeline Tracker
-        </h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-          {Object.entries(data.pipelineStages).map(([stage, count]) => (
-            <div key={stage} className="p-3 rounded-xl bg-slate-800/60 border border-slate-700/60">
-              <div className="text-lg font-black text-amber-400">{count}</div>
-              <div className="text-xs text-slate-400 mt-0.5">{stage}</div>
+      {/* Subsidy Pipeline & Stage Progression Matrix */}
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        {/* Pipeline Stage Breakdown */}
+        <div className="lg:col-span-7 p-6 rounded-3xl bg-[#120B1F]/80 border border-white/12 backdrop-blur-2xl shadow-2xl">
+          <h2 className="text-base font-bold text-white mb-4 uppercase font-mono tracking-wider flex items-center gap-2">
+            <Layers className="w-4 h-4 text-[#FF2E93]" />
+            Pipeline Stage Progression (All 42 Projects)
+          </h2>
+          <div className="space-y-3.5">
+            {Object.entries(data.pipelineStages).map(([stage, count]) => {
+              const pct = Math.round((count / data.totalProjectsMonth) * 100);
+              return (
+                <div key={stage} className="p-3.5 rounded-2xl bg-white/[0.02] border border-white/8">
+                  <div className="flex items-center justify-between text-xs mb-2">
+                    <span className="font-semibold text-white">{stage}</span>
+                    <span className="text-xs font-mono font-bold text-[#FF7A00]">{count} Projects ({pct}%)</span>
+                  </div>
+                  <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
+                    <div
+                      className="bg-gradient-to-r from-[#FF2E93] via-[#FF7A00] to-[#FFD166] h-2 rounded-full transition-all duration-500"
+                      style={{ width: `${Math.max(8, pct)}%` }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Subsidy Applications Card */}
+        <div className="lg:col-span-5 p-6 rounded-3xl bg-[#120B1F]/80 border border-white/12 backdrop-blur-2xl shadow-2xl flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-base font-bold text-white uppercase font-mono tracking-wider flex items-center gap-2">
+                <FileCheck2 className="w-4 h-4 text-[#FF7A00]" />
+                PM Surya Ghar Subsidy Vault
+              </h2>
+              <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                DBT Active
+              </span>
             </div>
-          ))}
+
+            <p className="text-xs text-[#A79FB6] mb-6 leading-relaxed">
+              Direct Central Subsidy claims submitted via the National Rooftop Solar Portal for fast-track homeowner reimbursement.
+            </p>
+
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
+                <div className="text-[10px] text-[#A79FB6] font-mono uppercase">Pending Applications</div>
+                <div className="text-xl font-black text-white mt-1 font-mono">
+                  {data.subsidyApplicationsPending} Homeowners
+                </div>
+              </div>
+              <div className="p-4 rounded-2xl bg-white/[0.03] border border-white/10">
+                <div className="text-[10px] text-[#A79FB6] font-mono uppercase">Total Locked Value</div>
+                <div className="text-xl font-black text-[#FF7A00] mt-1 font-mono">
+                  ₹{data.totalSubsidyAmountPending.toLocaleString('en-IN')}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="p-4 rounded-2xl bg-gradient-to-r from-[#FF2E93]/15 to-[#FF7A00]/15 border border-[#FF2E93]/30 text-xs text-[#D5CEE0] flex items-center gap-3">
+            <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+            <span>Average turnaround: 14 business days from DISCOM meter installation to DBT credit.</span>
+          </div>
         </div>
       </div>
 
-      {/* Scene 6 Core: Job-Level Profitability Ledger */}
-      <div className="rounded-2xl bg-slate-900/90 border border-slate-800 p-6 shadow-xl space-y-5">
+      {/* Job-Level Profitability Ledger Table */}
+      <div className="relative z-10 p-6 rounded-3xl bg-[#120B1F]/80 border border-white/12 backdrop-blur-2xl shadow-2xl space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h2 className="text-lg font-bold text-white flex items-center gap-2">
-              <TrendingUp className="w-5 h-5 text-amber-400" />
-              Job-by-Job Profitability Ledger
+            <h2 className="text-lg font-bold text-white uppercase font-mono tracking-wider flex items-center gap-2">
+              <Briefcase className="w-5 h-5 text-[#FF2E93]" />
+              Job-Level Profitability Ledger (BOM + Labor + Net Margin)
             </h2>
-            <p className="text-xs text-slate-400">
-              Granular breakdown: Revenue minus Hardware BOM minus Labor minus Misc fees for every rooftop project.
+            <p className="text-xs text-[#A79FB6] mt-0.5">
+              Live audit comparing gross contract value against component BOM procurement and labor expenses.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
+          {/* Search & Filters with Clean .ti-input & .ti-select */}
+          <div className="flex items-center gap-3">
             <div className="relative">
-              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
+              <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-[#A79FB6]" />
               <input
                 type="text"
-                placeholder="Search client or system..."
+                placeholder="Search customer or job #..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-9 pr-3 py-1.5 text-xs bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:outline-hidden focus:ring-1 focus:ring-amber-500 w-56"
+                className="ti-input text-xs pl-8 pr-3 py-2 w-52 rounded-xl"
               />
             </div>
 
-            <div className="flex items-center rounded-xl bg-slate-800 p-1 border border-slate-700">
-              <button
-                onClick={() => setFilterType('all')}
-                className={`px-3 py-1 text-xs font-semibold rounded-lg transition-colors ${
-                  filterType === 'all' ? 'bg-amber-500 text-slate-950 font-bold' : 'text-slate-400 hover:text-white'
-                }`}
-              >
-                All Jobs
-              </button>
-              <button
-                onClick={() => setFilterType('profitable')}
-                className={`px-3 py-1 text-xs font-semibold rounded-lg transition-colors ${
-                  filterType === 'profitable' ? 'bg-emerald-500 text-slate-950 font-bold' : 'text-slate-400 hover:text-white'
-                }`}
-              >
-                High Margin (&gt;25%)
-              </button>
-              <button
-                onClick={() => setFilterType('attention')}
-                className={`px-3 py-1 text-xs font-semibold rounded-lg transition-colors ${
-                  filterType === 'attention' ? 'bg-rose-500 text-white font-bold' : 'text-slate-400 hover:text-white'
-                }`}
-              >
-                Review Margin
-              </button>
-            </div>
+            <select
+              value={filterType}
+              onChange={(e) => setFilterType(e.target.value as any)}
+              className="ti-select text-xs py-2 px-3 rounded-xl cursor-pointer"
+            >
+              <option value="all">All Jobs</option>
+              <option value="profitable">High Margin (≥28%)</option>
+              <option value="attention">Review Margin (&lt;28%)</option>
+            </select>
           </div>
         </div>
 
         {/* Table */}
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs border-collapse">
-            <thead>
-              <tr className="border-b border-slate-800 text-slate-400 font-semibold bg-slate-800/40">
-                <th className="py-3 px-4">Project & Customer</th>
-                <th className="py-3 px-3">System Specs</th>
-                <th className="py-3 px-3">Revenue (₹)</th>
-                <th className="py-3 px-3">BOM Cost (₹)</th>
-                <th className="py-3 px-3">Labor (₹)</th>
-                <th className="py-3 px-3">Misc (₹)</th>
-                <th className="py-3 px-4">Net Profit (₹)</th>
-                <th className="py-3 px-3">Margin %</th>
-                <th className="py-3 px-3">Subsidy / Status</th>
+        <div className="overflow-x-auto rounded-2xl border border-white/10">
+          <table className="w-full text-left text-xs">
+            <thead className="bg-[#0A0514] text-[#A79FB6] font-mono uppercase text-[10px] tracking-wider border-b border-white/10">
+              <tr>
+                <th className="py-3 px-4">Job # / Client</th>
+                <th className="py-3 px-4">Size & Type</th>
+                <th className="py-3 px-4 text-right">Revenue</th>
+                <th className="py-3 px-4 text-right">BOM Cost</th>
+                <th className="py-3 px-4 text-right">Labor</th>
+                <th className="py-3 px-4 text-right">Net Profit</th>
+                <th className="py-3 px-4 text-center">Margin</th>
+                <th className="py-3 px-4">Subsidy Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/60 font-medium">
+            <tbody className="divide-y divide-white/5 font-sans">
               {filteredJobs.map((job) => (
-                <tr key={job.projectId} className="hover:bg-slate-800/30 transition-colors">
+                <tr key={job.projectId} className="hover:bg-white/[0.03] transition-colors">
                   <td className="py-3.5 px-4">
-                    <div className="font-bold text-white text-sm">{job.customerName}</div>
-                    <div className="text-[11px] text-slate-500">{job.projectNumber}</div>
+                    <div className="font-bold text-white">{job.customerName}</div>
+                    <div className="text-[10px] font-mono text-[#A79FB6]">{job.projectNumber}</div>
                   </td>
-                  <td className="py-3.5 px-3">
-                    <span className="font-semibold text-amber-300">{job.capacityKw} kW</span>
-                    <div className="text-[11px] text-slate-400">{job.systemType === 1 ? 'On-Grid' : 'Off-Grid'}</div>
+                  <td className="py-3.5 px-4 font-mono text-xs">
+                    <span className="font-bold text-[#FF7A00]">{job.capacityKw} kW</span>{' '}
+                    <span className="text-[#A79FB6]">{job.systemType === 1 ? 'On-Grid' : 'Off-Grid'}</span>
                   </td>
-                  <td className="py-3.5 px-3 font-semibold text-white">
+                  <td className="py-3.5 px-4 text-right font-mono font-bold text-white">
                     ₹{job.contractRevenue.toLocaleString('en-IN')}
                   </td>
-                  <td className="py-3.5 px-3 text-slate-300">
+                  <td className="py-3.5 px-4 text-right font-mono text-[#D5CEE0]">
                     ₹{job.hardwareBomCost.toLocaleString('en-IN')}
                   </td>
-                  <td className="py-3.5 px-3 text-slate-400">
+                  <td className="py-3.5 px-4 text-right font-mono text-[#D5CEE0]">
                     ₹{job.technicianLaborCost.toLocaleString('en-IN')}
                   </td>
-                  <td className="py-3.5 px-3 text-slate-500">
-                    ₹{job.miscCost.toLocaleString('en-IN')}
+                  <td className="py-3.5 px-4 text-right font-mono font-bold text-emerald-400">
+                    ₹{job.netProfit.toLocaleString('en-IN')}
                   </td>
-                  <td className="py-3.5 px-4 font-bold text-emerald-400 text-sm">
-                    +₹{job.netProfit.toLocaleString('en-IN')}
-                  </td>
-                  <td className="py-3.5 px-3">
-                    <span
-                      className={`px-2 py-0.5 rounded-full text-[11px] font-bold ${
-                        job.marginPercentage >= 30
-                          ? 'bg-emerald-500/20 text-emerald-400'
-                          : job.marginPercentage >= 25
-                          ? 'bg-blue-500/20 text-blue-400'
-                          : 'bg-amber-500/20 text-amber-400'
-                      }`}
-                    >
-                      {job.marginPercentage.toFixed(1)}%
+                  <td className="py-3.5 px-4 text-center font-mono">
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                      {job.marginPercentage}%
                     </span>
                   </td>
-                  <td className="py-3.5 px-3">
-                    <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wide bg-slate-800 border border-slate-700 text-slate-300">
-                      {job.subsidyStatus}
-                    </span>
+                  <td className="py-3.5 px-4 font-mono text-[11px] text-[#A79FB6]">
+                    {job.subsidyStatus}
                   </td>
                 </tr>
               ))}
@@ -429,118 +457,45 @@ export const SolarDirectorPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Grid: Subsidy Overview & 15-Technician Crew Payout Ledger */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Government Subsidy Paperwork Tracker */}
-        <div className="rounded-2xl bg-slate-900/90 border border-slate-800 p-6 shadow-xl space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className="text-base font-bold text-white flex items-center gap-2">
-                <FileCheck2 className="w-5 h-5 text-emerald-400" />
-                PM Surya Ghar & DISCOM Subsidy Tracker
-              </h3>
-              <p className="text-xs text-slate-400">
-                Tracking national portal claims (up to ₹78,000 per home) and DISCOM net-meter synchronization.
-              </p>
-            </div>
-            <span className="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              {data.subsidyApplicationsPending} Claims (₹{data.totalSubsidyAmountPending.toLocaleString('en-IN')})
-            </span>
-          </div>
-
-          <div className="space-y-3">
-            {data.jobProfitability.map((job) => (
-              <div
-                key={job.projectId}
-                className="p-3.5 rounded-xl bg-slate-800/50 border border-slate-700/60 hover:border-slate-600 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3"
-              >
-                <div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-mono font-bold text-amber-400">
-                      {job.projectNumber}
-                    </span>
-                    <span className="text-xs font-bold text-white">{job.customerName}</span>
-                    <span className="text-[10px] text-slate-400">({job.capacityKw} kW)</span>
-                  </div>
-                  <div className="text-[11px] text-slate-400 mt-0.5 flex items-center gap-2">
-                    <Building className="w-3 h-3 text-slate-500" />
-                    <span>MSEDCL State Grid</span>
-                    <span>•</span>
-                    <Clock className="w-3 h-3 text-slate-500" />
-                    <span>Active Tracking</span>
-                  </div>
-                </div>
-
-                <div className="text-right flex sm:flex-col items-center sm:items-end justify-between sm:justify-center">
-                  <div className="text-sm font-bold text-emerald-400">
-                    {job.subsidyStatus.includes('₹') ? job.subsidyStatus.match(/₹[\d,]+/)?.[0] || '₹78,000' : 'N/A'}
-                  </div>
-                  <span
-                    className={`text-[10px] font-semibold px-2 py-0.5 rounded-md mt-0.5 ${
-                      job.subsidyStatus.includes('Disbursed')
-                        ? 'bg-emerald-500/20 text-emerald-300'
-                        : job.subsidyStatus.includes('Synchronized') || job.subsidyStatus.includes('Scheduled')
-                        ? 'bg-blue-500/20 text-blue-300'
-                        : 'bg-slate-700 text-slate-400'
-                    }`}
-                  >
-                    {job.subsidyStatus}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
+      {/* 15-Technician Field Crew Performance Ledger */}
+      <div className="relative z-10 p-6 rounded-3xl bg-[#120B1F]/80 border border-white/12 backdrop-blur-2xl shadow-2xl space-y-4">
+        <div>
+          <h2 className="text-lg font-bold text-white uppercase font-mono tracking-wider flex items-center gap-2">
+            <Users className="w-5 h-5 text-[#00F0FF]" />
+            15-Technician Certified Crew Ledger & Pay Slip Reconciliation
+          </h2>
+          <p className="text-xs text-[#A79FB6] mt-0.5">
+            Job completion rate, installed kW capacity, customer sign-off rating, and accrued technician labor disbursement.
+          </p>
         </div>
 
-        {/* 15-Technician Crew Performance & Payout Ledger */}
-        <div className="rounded-2xl bg-slate-900/90 border border-slate-800 p-6 shadow-xl space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className="text-base font-bold text-white flex items-center gap-2">
-                <Users className="w-5 h-5 text-amber-400" />
-                15-Technician Field Crew Ledger
-              </h3>
-              <p className="text-xs text-slate-400">
-                Installation velocity, first-time inspection pass rate, and monthly payroll disbursement.
-              </p>
-            </div>
-            <span className="text-xs text-slate-400 font-semibold">
-              Crew Size: {data.activeTechniciansCount} Technicians
-            </span>
-          </div>
-
-          <div className="space-y-3">
-            {data.technicianPerformance.map((tech, idx) => (
-              <div
-                key={tech.technicianName}
-                className="p-3.5 rounded-xl bg-slate-800/50 border border-slate-700/60 flex items-center justify-between hover:border-slate-600 transition-all"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="w-7 h-7 rounded-lg bg-amber-500/10 text-amber-400 font-bold flex items-center justify-center text-xs border border-amber-500/20">
-                    #{idx + 1}
-                  </div>
-                  <div>
-                    <div className="font-bold text-white text-xs">{tech.technicianName}</div>
-                    <div className="text-[11px] text-slate-400 mt-0.5">
-                      {tech.jobsCompleted} installs completed ({tech.totalKwInstalled} kW) • ★ {tech.averageRating} rating
-                    </div>
-                  </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3.5">
+          {data.technicianPerformance.map((tech) => (
+            <div key={tech.technicianName} className="p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-[#FF2E93]/40 transition-all">
+              <div className="flex items-center justify-between mb-2">
+                <span className="font-bold text-xs text-white truncate">{tech.technicianName}</span>
+                <span className="text-[10px] font-bold font-mono text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded">
+                  ★ {tech.averageRating}
+                </span>
+              </div>
+              <div className="space-y-1 text-[11px] font-mono text-[#A79FB6]">
+                <div className="flex justify-between">
+                  <span>Installed:</span>
+                  <span className="text-white font-bold">{tech.totalKwInstalled} kW</span>
                 </div>
-
-                <div className="text-right">
-                  <div className="text-xs font-bold text-white">
-                    ₹{tech.totalEarnings.toLocaleString('en-IN')}
-                  </div>
-                  <div className="text-[10px] text-emerald-400 font-semibold">
-                    Verified Payout
-                  </div>
+                <div className="flex justify-between">
+                  <span>Jobs Done:</span>
+                  <span className="text-[#FF7A00] font-bold">{tech.jobsCompleted} Sites</span>
+                </div>
+                <div className="flex justify-between pt-1 border-t border-white/10 text-white font-bold">
+                  <span>Earnings:</span>
+                  <span className="text-emerald-400">₹{tech.totalEarnings.toLocaleString('en-IN')}</span>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
   );
 };
-export default SolarDirectorPage;

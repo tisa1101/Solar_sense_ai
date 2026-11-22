@@ -1,6 +1,7 @@
 ﻿import React from 'react';
 import { Sun, Heart, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { CompanyLogo } from '../components/CompanyLogo';
 
 export const LandingFooter: React.FC = () => {
   const navigate = useNavigate();
@@ -11,12 +12,8 @@ export const LandingFooter: React.FC = () => {
         <div className="grid grid-cols-2 md:grid-cols-6 gap-8 pb-12 border-b border-white/10">
           {/* Brand Info (Span 2) */}
           <div className="col-span-2 space-y-4">
-            <div className="flex items-center gap-2">
-              <div className="w-7 h-7 rounded-xl bg-gradient-to-tr from-[#FF7A59] via-[#FF5C8A] to-[#E284B3] flex items-center justify-center">
-                <Sun className="w-4 h-4 text-white" />
-              </div>
-              <span className="font-semibold text-base text-white tracking-tight">SolarSense</span>
-              <span className="text-xs text-[#FF9E79]">✦</span>
+            <div onClick={() => navigate('/')} className="cursor-pointer">
+              <CompanyLogo size="md" subtitle="LEONIDA POWER INITIATIVE" />
             </div>
             <p className="text-xs text-[#8B839E] leading-relaxed max-w-sm">
               Discover the future of clean energy management with SolarSense's AI integration. Effortless, neural-optimized rooftop solar systems and zero-curfew battery storage.

@@ -8,6 +8,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { UserRole } from '../types';
+import { CompanyLogo } from './CompanyLogo';
 
 export const Sidebar: React.FC = () => {
   const { user, logout } = useAuth();
@@ -43,20 +44,12 @@ export const Sidebar: React.FC = () => {
 
       {/* Sidebar */}
       <aside className={`fixed md:sticky top-0 z-40 w-68 bg-[#0D0917]/85 backdrop-blur-3xl text-[#D5CEE0] flex flex-col h-screen border-r border-white/10 shadow-2xl select-none transition-transform duration-300 ease-in-out ${mobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}>
-        {/* Brand Header */}
-        <div className="p-5 border-b border-white/10 flex items-center gap-3 bg-white/[0.02]">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-[#E284B3] via-[#B668D8] to-[#8A56E2] flex items-center justify-center text-white shadow-[0_0_24px_rgba(226,132,179,0.45)] shrink-0 font-black">
-            <Zap className="w-5 h-5 fill-white text-white animate-pulse" />
-          </div>
-          <div className="min-w-0">
-            <div className="flex items-center gap-1.5">
-              <span className="text-white font-black text-base tracking-tight font-display">SOLARSENSE</span>
-              <span className="text-[9px] bg-[#E284B3]/20 text-[#F4A5C6] px-1.5 py-0.5 rounded-full font-mono font-bold border border-[#E284B3]/30">
-                PRO
-              </span>
-            </div>
-            <p className="text-[10px] text-[#F5B895] font-mono font-semibold uppercase tracking-wider truncate">Enterprise Solar Suite</p>
-          </div>
+        {/* Brand Header with GTA VI Solar Crest */}
+        <div className="p-4 border-b border-white/10 flex items-center justify-between bg-white/[0.02]">
+          <CompanyLogo size="md" subtitle="ENTERPRISE SUITE" />
+          <span className="text-[9px] bg-[#FF2E93]/20 text-[#FF2E93] px-2 py-0.5 rounded-full font-mono font-bold border border-[#FF2E93]/30">
+            PRO
+          </span>
         </div>
 
         {/* Navigation Scroll */}

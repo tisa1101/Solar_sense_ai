@@ -2,6 +2,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { ChevronDown, Menu, X, Sun, Shield, UserCheck, ArrowRight, Sparkles } from 'lucide-react';
+import { CompanyLogo } from '../components/CompanyLogo';
 
 export const LandingNavbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -63,17 +64,9 @@ export const LandingNavbar: React.FC = () => {
           {/* Brand Logo with GTA VI Sunset Flare */}
           <div
             onClick={() => navigate('/')}
-            className="flex items-center gap-3 cursor-pointer group"
+            className="cursor-pointer"
           >
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#FF2E93] via-[#FF7A00] to-[#FFD166] flex items-center justify-center shadow-[0_0_22px_rgba(255,46,147,0.5)] group-hover:scale-105 transition-transform">
-              <Sun className="w-5 h-5 text-white" />
-            </div>
-            <div className="flex items-center gap-1.5">
-              <span className="font-black text-xl tracking-wider text-white uppercase font-['Plus_Jakarta_Sans',sans-serif]">
-                SOLARSENSE
-              </span>
-              <span className="text-sm text-[#FF7A00]">✦</span>
-            </div>
+            <CompanyLogo size="md" subtitle="LEONIDA 2026" />
           </div>
 
           {/* Desktop Navigation Links */}
