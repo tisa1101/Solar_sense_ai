@@ -50,16 +50,16 @@ export const PostMasterThreeSteps: React.FC = () => {
   ];
 
   return (
-    <section id="three-steps" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#07040E] text-white overflow-hidden">
-      {/* Background Subtle Atmosphere */}
+    <section id="three-steps" className="relative py-28 px-4 sm:px-6 lg:px-8 bg-[#06040C] text-white overflow-hidden">
+      {/* Vice City Ambient Horizon Glows */}
       <div className="absolute inset-0 pointer-events-none">
         <div
-          className="absolute top-1/2 right-0 w-[500px] h-[500px] rounded-full blur-[150px] opacity-15"
-          style={{ background: 'radial-gradient(circle, #E284B3 0%, #7928CA 50%, transparent 80%)' }}
+          className="absolute top-1/2 right-0 w-[550px] h-[550px] rounded-full blur-[170px] opacity-20"
+          style={{ background: 'radial-gradient(circle, #FF2E93 0%, #7928CA 50%, transparent 80%)' }}
         />
         <div
-          className="absolute -bottom-24 left-1/4 w-[450px] h-[450px] rounded-full blur-[160px] opacity-15"
-          style={{ background: 'radial-gradient(circle, #FF7A59 0%, transparent 70%)' }}
+          className="absolute -bottom-24 left-1/4 w-[500px] h-[500px] rounded-full blur-[180px] opacity-20"
+          style={{ background: 'radial-gradient(circle, #FF7A00 0%, transparent 70%)' }}
         />
       </div>
 
@@ -70,36 +70,39 @@ export const PostMasterThreeSteps: React.FC = () => {
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-xs uppercase tracking-widest text-[#E284B3] font-mono mb-3"
+            className="text-xs uppercase tracking-widest text-[#FF2E93] font-mono font-bold mb-3"
           >
-            SYSTEMATIC ENERGY FREEDOM
+            SYSTEMATIC ENERGY FREEDOM // LEONIDA STANDARD
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white mb-4"
+            className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white mb-4 uppercase font-['Plus_Jakarta_Sans',sans-serif]"
           >
-            Manage solar intelligence in 3 steps
+            MANAGE SOLAR INTELLIGENCE <br />
+            <span className="bg-gradient-to-r from-[#FF2E93] via-[#FF7A00] to-[#FFD166] bg-clip-text text-transparent">
+              IN 3 STEPS
+            </span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-base text-[#9A91AB] leading-relaxed max-w-xl mx-auto"
+            className="text-base text-[#D5CEE0] leading-relaxed max-w-xl mx-auto"
           >
             Everything needed to scale your energy independence — in one unified, AI-driven interface.
           </motion.p>
         </div>
 
-        {/* 3-Step Interactive Layout (from Image 3) */}
+        {/* 3-Step Interactive Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Left Column: Vertical Step Progression */}
           <div className="lg:col-span-6 space-y-6 relative">
             {/* Connecting Vertical Glowing Line */}
-            <div className="absolute left-[19px] top-6 bottom-6 w-[2px] bg-white/10" />
+            <div className="absolute left-[20px] top-6 bottom-6 w-[2px] bg-gradient-to-b from-[#FF2E93] via-[#FF7A00] to-[#7928CA]" />
 
             {steps.map((item) => {
               const isActive = activeStep === item.step;
@@ -113,33 +116,35 @@ export const PostMasterThreeSteps: React.FC = () => {
                 >
                   {/* Step Marker Dot / Ring */}
                   <div
-                    className={`absolute left-2.5 top-1.5 -translate-x-1/2 w-7 h-7 rounded-full flex items-center justify-center transition-all ${
+                    className={`absolute left-2.5 top-1.5 -translate-x-1/2 w-8 h-8 rounded-full flex items-center justify-center transition-all ${
                       isActive
-                        ? 'bg-gradient-to-tr from-[#FF7A59] to-[#E284B3] shadow-[0_0_18px_rgba(255,122,89,0.5)] ring-4 ring-[#FF7A59]/20'
-                        : 'bg-[#181126] border border-white/20 text-[#8B839E]'
+                        ? 'bg-gradient-to-tr from-[#FF2E93] to-[#FF7A00] shadow-[0_0_22px_rgba(255,46,147,0.6)] ring-4 ring-[#FF2E93]/25 scale-110'
+                        : 'bg-[#140D22] border border-white/20 text-[#A79FB6]'
                     }`}
                   >
-                    <span className="text-[11px] font-bold text-white">{item.step}</span>
+                    <span className="text-xs font-bold text-white font-mono">{item.step}</span>
                   </div>
 
                   {/* Step Card Content */}
                   <div
                     className={`p-5 rounded-2xl border transition-all ${
                       isActive
-                        ? 'bg-[#130E20]/90 border-white/15 shadow-[0_10px_35px_rgba(0,0,0,0.5)] backdrop-blur-xl'
+                        ? 'bg-[#120B1F]/90 border-[#FF2E93]/35 shadow-[0_10px_35px_rgba(0,0,0,0.6)] backdrop-blur-xl'
                         : 'bg-transparent border-transparent hover:border-white/5'
                     }`}
                   >
-                    <div className="text-[10px] uppercase font-mono tracking-wider text-[#FF9E79] mb-1">
+                    <div className="text-[10px] uppercase font-mono font-bold tracking-wider text-[#FF7A00] mb-1">
                       {item.tag}
                     </div>
-                    <h3 className="text-base font-semibold text-white mb-2">{item.title}</h3>
-                    <p className="text-xs text-[#9A91AB] leading-relaxed mb-3">
+                    <h3 className="text-base font-bold text-white mb-2 font-['Plus_Jakarta_Sans',sans-serif]">
+                      {item.title}
+                    </h3>
+                    <p className="text-xs text-[#D5CEE0] leading-relaxed mb-3">
                       {item.description}
                     </p>
 
                     {isActive && (
-                      <div className="flex items-center gap-3 pt-3 border-t border-white/10 text-xs text-[#E284B3] font-medium">
+                      <div className="flex items-center gap-3 pt-3 border-t border-white/10 text-xs text-[#FF2E93] font-bold">
                         <span>Explore in Portal</span>
                         <ArrowRight className="w-3.5 h-3.5" />
                       </div>
@@ -150,41 +155,41 @@ export const PostMasterThreeSteps: React.FC = () => {
             })}
           </div>
 
-          {/* Right Column: Dynamic Step Preview Card (matching Image 3 & Image 2) */}
+          {/* Right Column: Dynamic Step Preview Card */}
           <div className="lg:col-span-6">
             <motion.div
               key={activeStep}
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4 }}
-              className="rounded-3xl border border-white/15 bg-[#120D1D]/90 p-8 backdrop-blur-2xl shadow-[0_20px_70px_rgba(0,0,0,0.8)] relative overflow-hidden"
+              className="rounded-3xl border border-white/15 bg-[#100A1C]/90 p-8 backdrop-blur-2xl shadow-[0_25px_80px_rgba(0,0,0,0.9)] relative overflow-hidden"
             >
               {/* Internal Accent Glow */}
               <div
-                className="absolute -top-16 -right-16 w-60 h-60 rounded-full blur-3xl opacity-30"
+                className="absolute -top-16 -right-16 w-64 h-64 rounded-full blur-3xl opacity-35"
                 style={{
                   background:
                     activeStep === 1
-                      ? 'radial-gradient(circle, #FF7A59 0%, transparent 70%)'
+                      ? 'radial-gradient(circle, #FF2E93 0%, transparent 70%)'
                       : activeStep === 2
-                      ? 'radial-gradient(circle, #E284B3 0%, transparent 70%)'
-                      : 'radial-gradient(circle, #9B51E0 0%, transparent 70%)'
+                      ? 'radial-gradient(circle, #FF7A00 0%, transparent 70%)'
+                      : 'radial-gradient(circle, #00F0FF 0%, transparent 70%)'
                 }}
               />
 
               {/* Card Header */}
               <div className="flex items-center justify-between pb-6 border-b border-white/10 mb-6">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-2xl bg-white/[0.06] border border-white/15 flex items-center justify-center text-[#FF9E79]">
-                    {activeStep === 1 && <Sparkles className="w-5 h-5" />}
-                    {activeStep === 2 && <Eye className="w-5 h-5 text-[#E284B3]" />}
-                    {activeStep === 3 && <Battery className="w-5 h-5 text-emerald-400" />}
+                  <div className="w-10 h-10 rounded-2xl bg-white/[0.06] border border-white/15 flex items-center justify-center text-[#FF7A00]">
+                    {activeStep === 1 && <Sparkles className="w-5 h-5 text-[#FF2E93]" />}
+                    {activeStep === 2 && <Eye className="w-5 h-5 text-[#FF7A00]" />}
+                    {activeStep === 3 && <Battery className="w-5 h-5 text-[#00F0FF]" />}
                   </div>
                   <div>
-                    <div className="text-sm font-semibold text-white">
+                    <div className="text-sm font-bold text-white font-mono">
                       {steps[activeStep - 1].details.badge}
                     </div>
-                    <div className="text-[11px] text-[#8B839E]">Neural Validation Engine</div>
+                    <div className="text-[11px] text-[#A79FB6]">Neural Validation Engine</div>
                   </div>
                 </div>
 
@@ -197,22 +202,22 @@ export const PostMasterThreeSteps: React.FC = () => {
               {activeStep === 1 && (
                 <div className="space-y-4">
                   <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10">
-                    <div className="flex items-center justify-between text-xs mb-2">
-                      <span className="text-[#8B839E]">Monthly Power Consumption</span>
-                      <span className="text-white font-mono font-bold">950 kWh</span>
+                    <div className="flex items-center justify-between text-xs mb-2 font-mono">
+                      <span className="text-[#A79FB6]">MONTHLY POWER CONSUMPTION</span>
+                      <span className="text-white font-bold">950 kWh</span>
                     </div>
                     <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
-                      <div className="bg-gradient-to-r from-[#FF7A59] to-[#E284B3] h-2 rounded-full w-[75%]" />
+                      <div className="bg-gradient-to-r from-[#FF2E93] to-[#FF7A00] h-2 rounded-full w-[75%]" />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
                     <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/10">
-                      <div className="text-[11px] text-[#8B839E]">Optimal Capacity</div>
+                      <div className="text-[11px] text-[#A79FB6] font-mono">OPTIMAL CAPACITY</div>
                       <div className="text-base font-bold text-white mt-1">8.4 kW Bifacial</div>
                     </div>
                     <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/10">
-                      <div className="text-[11px] text-[#8B839E]">Annual Savings</div>
+                      <div className="text-[11px] text-[#A79FB6] font-mono">ANNUAL SAVINGS</div>
                       <div className="text-base font-bold text-emerald-400 mt-1">₹1,70,400</div>
                     </div>
                   </div>
@@ -221,26 +226,26 @@ export const PostMasterThreeSteps: React.FC = () => {
 
               {activeStep === 2 && (
                 <div className="space-y-4">
-                  <div className="relative rounded-xl overflow-hidden border border-white/10 bg-[#0E0A17] p-4 text-center">
-                    <div className="text-xs text-[#E284B3] font-medium mb-1">
+                  <div className="relative rounded-xl overflow-hidden border border-white/10 bg-[#0A0514] p-4 text-center">
+                    <div className="text-xs text-[#FF2E93] font-bold mb-1 font-mono uppercase">
                       Keras MobileNetV2 Rooftop Analysis
                     </div>
-                    <div className="text-[11px] text-[#8B839E]">
+                    <div className="text-[11px] text-[#A79FB6]">
                       High-resolution visual segmentation active
                     </div>
 
                     <div className="mt-4 grid grid-cols-3 gap-2 text-center">
                       <div className="p-2 rounded-lg bg-white/[0.03] border border-white/10">
-                        <div className="text-[10px] text-[#8B839E]">Pitch</div>
+                        <div className="text-[10px] text-[#A79FB6] font-mono">Pitch</div>
                         <div className="text-xs font-bold text-white">18° South</div>
                       </div>
                       <div className="p-2 rounded-lg bg-white/[0.03] border border-white/10">
-                        <div className="text-[10px] text-[#8B839E]">Shade Risk</div>
+                        <div className="text-[10px] text-[#A79FB6] font-mono">Shade Risk</div>
                         <div className="text-xs font-bold text-emerald-400">Minimal</div>
                       </div>
                       <div className="p-2 rounded-lg bg-white/[0.03] border border-white/10">
-                        <div className="text-[10px] text-[#8B839E]">Suitability</div>
-                        <div className="text-xs font-bold text-[#FF9E79]">98/100</div>
+                        <div className="text-[10px] text-[#A79FB6] font-mono">Suitability</div>
+                        <div className="text-xs font-bold text-[#FF7A00]">98/100</div>
                       </div>
                     </div>
                   </div>
@@ -250,9 +255,9 @@ export const PostMasterThreeSteps: React.FC = () => {
               {activeStep === 3 && (
                 <div className="space-y-4">
                   <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10">
-                    <div className="flex items-center justify-between text-xs mb-2">
-                      <span className="text-[#8B839E]">SafeDC™ Battery Status</span>
-                      <span className="text-emerald-400 font-mono font-bold">88% (10 kWh)</span>
+                    <div className="flex items-center justify-between text-xs mb-2 font-mono">
+                      <span className="text-[#A79FB6]">SAFEDC™ BATTERY RESERVE</span>
+                      <span className="text-emerald-400 font-bold">88% (10 kWh)</span>
                     </div>
                     <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
                       <div className="bg-emerald-400 h-2 rounded-full w-[88%]" />
@@ -261,12 +266,12 @@ export const PostMasterThreeSteps: React.FC = () => {
 
                   <div className="grid grid-cols-2 gap-3">
                     <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/10">
-                      <div className="text-[11px] text-[#8B839E]">Rapid Shutdown</div>
+                      <div className="text-[11px] text-[#A79FB6] font-mono">RAPID SHUTDOWN</div>
                       <div className="text-base font-bold text-white mt-1">1V Touch-Safe</div>
                     </div>
                     <div className="p-3.5 rounded-xl bg-white/[0.02] border border-white/10">
-                      <div className="text-[11px] text-[#8B839E]">Grid Export</div>
-                      <div className="text-base font-bold text-[#E284B3] mt-1">Net-Metered</div>
+                      <div className="text-[11px] text-[#A79FB6] font-mono">GRID EXPORT</div>
+                      <div className="text-base font-bold text-[#FF2E93] mt-1">Net-Metered</div>
                     </div>
                   </div>
                 </div>
@@ -274,10 +279,10 @@ export const PostMasterThreeSteps: React.FC = () => {
 
               {/* Bottom Quick Button */}
               <div className="mt-6 pt-5 border-t border-white/10 flex items-center justify-between">
-                <span className="text-xs text-[#8B839E]">Ready to run your site assessment?</span>
+                <span className="text-xs text-[#A79FB6]">Ready to run your site assessment?</span>
                 <button
                   onClick={() => navigate('/portal')}
-                  className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#FF7A59] to-[#E284B3] text-white text-xs font-medium hover:brightness-110 transition-all cursor-pointer shadow-md"
+                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#FF2E93] via-[#FF7A00] to-[#FFD166] text-white text-xs font-bold uppercase tracking-wider hover:brightness-110 transition-all cursor-pointer shadow-md"
                 >
                   Launch in Portal ✦
                 </button>

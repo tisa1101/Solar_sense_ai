@@ -19,7 +19,7 @@ import {
   Home,
   Compass,
   ArrowRight,
-  Sliders,
+  Flame,
   Check
 } from 'lucide-react';
 
@@ -60,76 +60,98 @@ export const PostMasterHero: React.FC = () => {
   };
 
   return (
-    <section className="relative min-h-screen pt-32 pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#07040E] text-white">
-      {/* Planetary Atmosphere & Glowing Orbs (Exact Reference: Image 3) */}
+    <section className="relative min-h-screen pt-32 pb-24 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#06040C] text-white">
+      {/* =========================================================
+          GTA VI / VICE CITY CINEMATIC ATMOSPHERE & SUNSET HORIZON
+          ========================================================= */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {/* Soft Peach / Coral Ambient Sphere (Top Center / Right) */}
+        {/* Hot Pink Sunset Radial Flare (Top-Center) */}
         <div
-          className="absolute -top-16 left-1/2 -translate-x-1/4 w-[520px] h-[520px] rounded-full blur-[140px] opacity-25"
-          style={{ background: 'radial-gradient(circle, #FF9E79 0%, #FF5C8A 45%, transparent 75%)' }}
+          className="absolute -top-32 left-1/2 -translate-x-1/2 w-[900px] h-[650px] rounded-full blur-[180px] opacity-35"
+          style={{ background: 'radial-gradient(circle, #FF2E93 0%, #FF7A00 45%, rgba(121,40,202,0.3) 70%, transparent 85%)' }}
         />
-        {/* Deep Mauve / Purple Radial Glow (Left Center) */}
+        {/* Miami Orange / Golden Hour Ambient Light (Right Side) */}
         <div
-          className="absolute top-1/3 -left-32 w-[600px] h-[600px] rounded-full blur-[170px] opacity-20"
-          style={{ background: 'radial-gradient(circle, #9B51E0 0%, #682CD6 40%, transparent 75%)' }}
+          className="absolute top-1/4 -right-40 w-[700px] h-[700px] rounded-full blur-[190px] opacity-25"
+          style={{ background: 'radial-gradient(circle, #FF7A00 0%, #FF2E93 40%, transparent 75%)' }}
         />
-        {/* Soft Celestial Glow behind the Studio Mockup */}
+        {/* Deep Vice Purple / Cyan Nightlife Depth (Left Side) */}
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[450px] rounded-full blur-[160px] opacity-15"
-          style={{ background: 'radial-gradient(ellipse, #E284B3 0%, #7928CA 50%, transparent 80%)' }}
+          className="absolute top-1/3 -left-40 w-[750px] h-[750px] rounded-full blur-[180px] opacity-25"
+          style={{ background: 'radial-gradient(circle, #7928CA 0%, #00F0FF 30%, transparent 75%)' }}
         />
-        {/* Floating Ring / Sphere Graphic Accents */}
-        <div className="absolute top-44 left-16 w-16 h-16 rounded-full border border-white/10 opacity-40 blur-[0.5px]" />
-        <div className="absolute top-64 right-24 w-24 h-24 rounded-full border border-white/10 opacity-30" />
+        {/* Subtle Horizontal Sunset Horizon Band */}
+        <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#FF2E93]/25 to-transparent" />
+
+        {/* Tropical Palm Tree Silhouette Accents */}
+        <div className="absolute bottom-0 left-0 w-80 h-96 opacity-10 bg-[radial-gradient(ellipse_at_bottom_left,#FF2E93_0%,transparent_70%)]" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 opacity-10 bg-[radial-gradient(ellipse_at_bottom_right,#FF7A00_0%,transparent_70%)]" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Hero Header & Headline Area */}
         <div className="text-center max-w-4xl mx-auto mb-14">
-          {/* Eyebrow Sparkle Badge */}
+          {/* Rockstar-Style Cinematic Eyebrow Tag */}
           <motion.div
             initial={{ opacity: 0, y: -12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 mb-6"
+            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-[#FF2E93]/40 bg-[#FF2E93]/10 text-white text-[11px] font-mono font-bold tracking-widest uppercase mb-6 shadow-[0_0_30px_rgba(255,46,147,0.35)]"
           >
-            <span className="text-xl sm:text-2xl text-[#E284B3] font-light tracking-wide">
-              where AI meets clean energy management.
-            </span>
-            <span className="text-xl sm:text-2xl text-[#FF9E79]">✦</span>
+            <span className="w-2 h-2 rounded-full bg-[#FF2E93] animate-ping" />
+            <span className="text-[#FF2E93]">LEONIDA POWER INITIATIVE</span>
+            <span className="text-white/30">•</span>
+            <span className="text-[#FF7A00]">VICE CITY 2026</span>
+            <span className="text-white/30">•</span>
+            <span className="text-[#00F0FF]">AI NEURAL GRID</span>
           </motion.div>
+
+          {/* Bold Cinematic Display Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.05] tracking-tight mb-6 font-['Plus_Jakarta_Sans',sans-serif] uppercase"
+          >
+            UNLIMITED POWER.{' '}
+            <br />
+            <span className="bg-gradient-to-r from-[#FF2E93] via-[#FF7A00] to-[#FFD166] bg-clip-text text-transparent drop-shadow-[0_4px_30px_rgba(255,46,147,0.4)]">
+              ZERO GRID DEPENDENCY.
+            </span>
+          </motion.h1>
 
           {/* Subtitle Text */}
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15 }}
-            className="text-base sm:text-lg text-[#B5AEC6] leading-relaxed max-w-2xl mx-auto mb-9 font-normal"
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-base sm:text-lg text-[#D5CEE0] leading-relaxed max-w-2xl mx-auto mb-9 font-normal font-sans"
           >
-            Discover the Future of Solar Energy with SolarSense's Neural AI Integration. Your Gateway to Effortless AI-Driven Clean Energy Optimization.
+            Harness peak tropical irradiance with DC-optimized bifacial modules, whole-estate 10 kWh battery storage, and Keras deep neural vision engineered for complete energy freedom.
           </motion.p>
 
-          {/* CTA Buttons Row */}
+          {/* GTA VI Sunset Gradient CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.25 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
             className="flex flex-wrap items-center justify-center gap-4 mb-8"
           >
             <button
               onClick={() => navigate('/portal')}
-              className="px-7 py-3 rounded-full bg-gradient-to-r from-[#FF7A59] via-[#FF5C8A] to-[#E284B3] text-white font-medium text-sm hover:brightness-110 transition-all shadow-[0_4px_25px_rgba(255,122,89,0.35)] cursor-pointer"
+              className="px-8 py-3.5 rounded-full bg-gradient-to-r from-[#FF2E93] via-[#FF7A00] to-[#FFD166] text-white font-bold text-sm tracking-wide uppercase hover:brightness-110 transition-all shadow-[0_4px_30px_rgba(255,46,147,0.45)] hover:scale-105 cursor-pointer flex items-center gap-2"
             >
-              Get started for free
+              <span>Get started for free</span>
+              <ArrowRight className="w-4 h-4" />
             </button>
             <button
               onClick={() => {
                 const el = document.querySelector('#three-steps');
                 if (el) el.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="px-7 py-3 rounded-full bg-white/[0.04] hover:bg-white/[0.08] text-white/90 font-medium text-sm border border-white/12 backdrop-blur-md transition-all cursor-pointer"
+              className="px-8 py-3.5 rounded-full bg-white/[0.04] hover:bg-white/[0.08] text-white font-semibold text-sm border border-white/20 backdrop-blur-md transition-all hover:border-[#FF2E93]/50 cursor-pointer"
             >
-              Learn more
+              Explore Architecture
             </button>
           </motion.div>
 
@@ -137,76 +159,85 @@ export const PostMasterHero: React.FC = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.35 }}
-            className="flex items-center justify-center gap-6 text-xs text-[#8B839E]"
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex flex-wrap items-center justify-center gap-6 text-xs text-[#A79FB6] font-mono"
           >
             <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#FF7A59]" />
-              No credit card required
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF2E93]" />
+              Zero credit card required
             </span>
             <span className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#E284B3]" />
-              14-day energy guarantee
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF7A00]" />
+              PM Surya Ghar ₹78,000 Subsidy
             </span>
-            <span className="hidden sm:flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#9B51E0]" />
-              Instant DISCOM simulation
+            <span className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#00F0FF]" />
+              SafeDC™ 1V Touch-Safe Certified
             </span>
           </motion.div>
         </div>
 
-        {/* Center Studio Card Mockup (Exact Centerpiece from Image 3 & Image 2) */}
+        {/* =========================================================
+            CENTER STUDIO CARD MOCKUP (POST MASTER + VICE CITY THEME)
+            ========================================================= */}
         <motion.div
           initial={{ opacity: 0, y: 35 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="relative max-w-5xl mx-auto rounded-2xl border border-white/12 bg-[#120D1D]/90 backdrop-blur-2xl shadow-[0_20px_80px_rgba(0,0,0,0.85)] overflow-hidden"
+          transition={{ duration: 0.8, delay: 0.35 }}
+          className="relative max-w-5xl mx-auto rounded-3xl border border-white/15 bg-[#100A1C]/90 backdrop-blur-2xl shadow-[0_25px_90px_rgba(0,0,0,0.9)] overflow-hidden"
         >
-          {/* Top Window Navigation Bar (from Image 3) */}
-          <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#0E0A17]/80">
+          {/* Top Window Navigation Bar */}
+          <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-[#0C0716]/90">
             {/* Logo / Title */}
             <div className="flex items-center gap-3">
-              <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-[#FF7A59] to-[#E284B3] flex items-center justify-center shadow-[0_0_15px_rgba(255,122,89,0.4)]">
+              <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#FF2E93] to-[#FF7A00] flex items-center justify-center shadow-[0_0_20px_rgba(255,46,147,0.45)]">
                 <Sun className="w-4 h-4 text-white" />
               </div>
-              <span className="font-semibold text-sm tracking-wide text-white">SolarSense Studio</span>
+              <div>
+                <span className="font-bold text-sm tracking-wider uppercase text-white font-mono">
+                  SOLARSENSE STUDIO
+                </span>
+                <span className="hidden sm:inline-block ml-2 text-[10px] text-[#00F0FF] font-mono bg-[#00F0FF]/10 px-1.5 py-0.5 rounded border border-[#00F0FF]/20">
+                  v2.6 LIVE
+                </span>
+              </div>
             </div>
 
             {/* Central Search Bar */}
-            <div className="hidden md:flex items-center gap-2 px-4 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 w-80 text-xs text-[#8B839E]">
-              <Search className="w-3.5 h-3.5 text-[#8B839E]" />
+            <div className="hidden md:flex items-center gap-2 px-4 py-1.5 rounded-xl bg-white/[0.04] border border-white/10 w-80 text-xs text-[#A79FB6]">
+              <Search className="w-3.5 h-3.5 text-[#A79FB6]" />
               <span>Search anything you want ...</span>
-              <span className="ml-auto text-[10px] bg-white/10 px-1.5 py-0.5 rounded text-white/60">⌘K</span>
+              <span className="ml-auto text-[10px] bg-white/10 px-1.5 py-0.5 rounded text-white/60 font-mono">⌘K</span>
             </div>
 
             {/* Right Quick Support & Profile */}
             <div className="flex items-center gap-4 text-xs">
               <button
                 onClick={() => navigate('/portal')}
-                className="hidden sm:flex items-center gap-1.5 text-[#B5AEC6] hover:text-white transition-colors cursor-pointer"
+                className="hidden sm:flex items-center gap-1.5 text-[#D5CEE0] hover:text-[#FF7A00] transition-colors cursor-pointer font-medium"
               >
-                <PhoneCall className="w-3.5 h-3.5 text-[#FF7A59]" />
+                <PhoneCall className="w-3.5 h-3.5 text-[#FF2E93]" />
                 <span>Call 24/7 Support</span>
               </button>
 
-              <div className="flex items-center gap-2 pl-3 border-l border-white/10">
-                <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#9B51E0] to-[#FF5C8A] flex items-center justify-center text-[11px] font-bold text-white shadow-inner">
+              <div className="flex items-center gap-2.5 pl-3 border-l border-white/10">
+                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#7928CA] via-[#FF2E93] to-[#FF7A00] flex items-center justify-center text-[11px] font-bold text-white shadow-inner">
                   EV
                 </div>
                 <div className="hidden sm:block text-left">
-                  <div className="text-[11px] font-medium text-white leading-tight">Elena Vance</div>
-                  <div className="text-[9px] text-[#8B839E]">Lead Architect</div>
+                  <div className="text-[11px] font-bold text-white leading-tight">Elena Vance</div>
+                  <div className="text-[9px] text-[#FF2E93] font-mono">Lead Architect</div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* 3-Column Studio Body (from Image 3 & Image 2) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[520px]">
+          {/* 3-Column Studio Body */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[530px]">
             {/* Left Sidebar Menu */}
-            <div className="lg:col-span-3 border-b lg:border-b-0 lg:border-r border-white/10 p-4 bg-[#0F0A19]/50">
-              <div className="text-[10px] font-bold uppercase tracking-widest text-[#7B738D] px-3 mb-3">
-                MAIN
+            <div className="lg:col-span-3 border-b lg:border-b-0 lg:border-r border-white/10 p-4 bg-[#0A0614]/60">
+              <div className="text-[10px] font-bold uppercase tracking-widest text-[#7E758D] px-3 mb-3 font-mono">
+                TELEMETRY SUITE
               </div>
               <nav className="space-y-1">
                 {[
@@ -224,13 +255,13 @@ export const PostMasterHero: React.FC = () => {
                     <button
                       key={item.id}
                       onClick={() => setActiveTab(item.id as any)}
-                      className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all text-left cursor-pointer ${
+                      className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all text-left cursor-pointer ${
                         isActive
-                          ? 'bg-gradient-to-r from-white/10 to-white/[0.04] text-white border border-white/15 shadow-[0_2px_12px_rgba(0,0,0,0.3)]'
-                          : 'text-[#9A91AB] hover:text-white hover:bg-white/[0.03]'
+                          ? 'bg-gradient-to-r from-[#FF2E93]/20 via-[#FF7A00]/10 to-transparent text-white border border-[#FF2E93]/30 shadow-[0_2px_15px_rgba(255,46,147,0.2)]'
+                          : 'text-[#A79FB6] hover:text-white hover:bg-white/[0.03]'
                       }`}
                     >
-                      <Icon className={`w-4 h-4 ${isActive ? 'text-[#FF9E79]' : 'text-[#7B738D]'}`} />
+                      <Icon className={`w-4 h-4 ${isActive ? 'text-[#FF2E93]' : 'text-[#7E758D]'}`} />
                       <span>{item.label}</span>
                     </button>
                   );
@@ -238,40 +269,42 @@ export const PostMasterHero: React.FC = () => {
               </nav>
 
               <div className="mt-8 pt-4 border-t border-white/10 px-3">
-                <div className="text-[10px] text-[#7B738D] uppercase tracking-wider mb-2 font-mono">
+                <div className="text-[10px] text-[#7E758D] uppercase tracking-wider mb-2 font-mono">
                   ACTIVE DISCOM
                 </div>
                 <div className="flex items-center justify-between text-xs text-white">
                   <span>Tata Power Delhi</span>
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 </div>
-                <div className="text-[10px] text-[#B5AEC6] mt-0.5">Bi-directional Net Meter</div>
+                <div className="text-[10px] text-[#00F0FF] mt-0.5 font-mono">Bi-directional Net Meter</div>
               </div>
             </div>
 
-            {/* Middle Column: Generate System Formulation (from Image 3) */}
-            <div className="lg:col-span-5 p-6 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10 bg-[#120D1D]/70">
+            {/* Middle Column: Generate System Formulation */}
+            <div className="lg:col-span-5 p-6 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-white/10 bg-[#120B1F]/70">
               <div>
                 <div className="mb-5">
-                  <h3 className="text-base font-semibold text-white mb-1">Generate Solar Architecture</h3>
-                  <p className="text-xs text-[#9A91AB] leading-relaxed">
-                    specify the desired capacity, roof type, and storage. Once you provide that information, AI will optimize the array accordingly.
+                  <h3 className="text-base font-bold text-white mb-1 uppercase tracking-wide font-mono">
+                    Generate Solar Architecture
+                  </h3>
+                  <p className="text-xs text-[#A79FB6] leading-relaxed">
+                    Specify capacity, roof type, and storage. Our neural engine synthesizes real-time DISCOM optimization.
                   </p>
                 </div>
 
-                {/* System Type Dropdown (Exact match to clean dropdown from Image 3) */}
+                {/* System Type Dropdown */}
                 <div className="mb-4">
-                  <label className="block text-xs font-medium text-[#B5AEC6] mb-1.5">
+                  <label className="block text-xs font-semibold text-[#D5CEE0] mb-1.5 uppercase font-mono tracking-wider">
                     System type
                   </label>
                   <div className="relative">
                     <select
                       value={systemType}
                       onChange={(e) => setSystemType(e.target.value)}
-                      className="ti-select w-full text-xs text-white bg-[#130E20]/90 border border-white/15 rounded-xl py-2.5 px-3.5 focus:border-[#E284B3] focus:outline-none focus:ring-1 focus:ring-[#E284B3]/30 transition-all cursor-pointer"
+                      className="ti-select w-full text-xs text-white bg-[#140D24]/90 border border-white/15 rounded-xl py-2.5 px-3.5 focus:border-[#FF2E93] focus:outline-none focus:ring-1 focus:ring-[#FF2E93]/40 transition-all cursor-pointer"
                     >
                       {systemOptions.map((opt) => (
-                        <option key={opt.id} value={opt.id} className="bg-[#0E0A18] text-white">
+                        <option key={opt.id} value={opt.id} className="bg-[#0C0716] text-white">
                           {opt.label} ({opt.kw})
                         </option>
                       ))}
@@ -279,19 +312,19 @@ export const PostMasterHero: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Prompt Textarea with "Generate with AI" action link (from Image 3) */}
+                {/* Prompt Textarea */}
                 <div className="mb-4">
                   <div className="flex items-center justify-between mb-1.5">
-                    <label className="text-xs font-medium text-[#B5AEC6]">
-                      Architecture prompt
+                    <label className="text-xs font-semibold text-[#D5CEE0] uppercase font-mono tracking-wider">
+                      Architecture Prompt
                     </label>
                     <button
                       onClick={handleAutoDerive}
                       type="button"
-                      className="text-[11px] text-[#E284B3] hover:text-[#FF9E79] flex items-center gap-1 font-medium transition-colors cursor-pointer"
+                      className="text-[11px] text-[#FF2E93] hover:text-[#FF7A00] flex items-center gap-1 font-bold transition-colors cursor-pointer"
                     >
                       <Sparkles className="w-3 h-3" />
-                      <span>Generate with AI</span>
+                      <span>Auto-derive with AI ✦</span>
                     </button>
                   </div>
 
@@ -299,23 +332,23 @@ export const PostMasterHero: React.FC = () => {
                     rows={4}
                     value={promptText}
                     onChange={(e) => setPromptText(e.target.value)}
-                    className="ti-input w-full text-xs text-white/90 bg-[#120D1E]/70 border border-white/15 rounded-xl p-3 focus:border-[#E284B3] focus:outline-none focus:ring-1 focus:ring-[#E284B3]/30 leading-relaxed resize-none"
+                    className="ti-input w-full text-xs text-white/90 bg-[#140D24]/70 border border-white/15 rounded-xl p-3 focus:border-[#FF2E93] focus:outline-none focus:ring-1 focus:ring-[#FF2E93]/40 leading-relaxed resize-none"
                   />
                 </div>
 
                 {/* Quick specs chips */}
                 <div className="grid grid-cols-3 gap-2 mb-4">
-                  <div className="rounded-xl border border-white/10 bg-white/[0.02] p-2 text-center">
-                    <div className="text-[10px] text-[#8B839E]">Peak Power</div>
+                  <div className="rounded-xl border border-white/10 bg-white/[0.02] p-2.5 text-center">
+                    <div className="text-[10px] text-[#7E758D] font-mono">PEAK POWER</div>
                     <div className="text-xs font-bold text-white mt-0.5">{currentSystem.kw}</div>
                   </div>
-                  <div className="rounded-xl border border-white/10 bg-white/[0.02] p-2 text-center">
-                    <div className="text-[10px] text-[#8B839E]">CEC Eff.</div>
-                    <div className="text-xs font-bold text-[#E284B3] mt-0.5">{currentSystem.eff}</div>
+                  <div className="rounded-xl border border-white/10 bg-white/[0.02] p-2.5 text-center">
+                    <div className="text-[10px] text-[#7E758D] font-mono">CEC EFFICIENCY</div>
+                    <div className="text-xs font-bold text-[#FF2E93] mt-0.5">{currentSystem.eff}</div>
                   </div>
-                  <div className="rounded-xl border border-white/10 bg-white/[0.02] p-2 text-center">
-                    <div className="text-[10px] text-[#8B839E]">Est. Savings</div>
-                    <div className="text-xs font-bold text-[#FF7A59] mt-0.5">{currentSystem.savings}</div>
+                  <div className="rounded-xl border border-white/10 bg-white/[0.02] p-2.5 text-center">
+                    <div className="text-[10px] text-[#7E758D] font-mono">EST. SAVINGS</div>
+                    <div className="text-xs font-bold text-[#FF7A00] mt-0.5">{currentSystem.savings}</div>
                   </div>
                 </div>
               </div>
@@ -325,7 +358,7 @@ export const PostMasterHero: React.FC = () => {
                 <button
                   onClick={handleGenerate}
                   disabled={isGenerating}
-                  className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-[#FF7A59] via-[#FF5C8A] to-[#E284B3] hover:brightness-110 text-white font-medium text-xs flex items-center justify-center gap-2 shadow-[0_4px_16px_rgba(255,122,89,0.3)] transition-all cursor-pointer disabled:opacity-50"
+                  className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#FF2E93] via-[#FF7A00] to-[#FFD166] hover:brightness-110 text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(255,46,147,0.35)] transition-all cursor-pointer disabled:opacity-50"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>{isGenerating ? 'Synthesizing Neural Architecture...' : 'Generate System Spec ✦'}</span>
@@ -333,59 +366,59 @@ export const PostMasterHero: React.FC = () => {
               </div>
             </div>
 
-            {/* Right Column: Preview Post / Smartphone Mockup (Exact Reference: Image 3 + Image 2) */}
-            <div className="lg:col-span-4 p-6 bg-[#0E0A17]/70 flex flex-col items-center justify-center">
+            {/* Right Column: iPhone 15 Pro Smartphone Mockup */}
+            <div className="lg:col-span-4 p-6 bg-[#0B0616]/80 flex flex-col items-center justify-center">
               <div className="w-full flex items-center justify-between mb-3 text-xs">
-                <span className="font-semibold text-white">Preview System</span>
-                <span className="text-[11px] text-[#8B839E] bg-white/[0.04] px-2 py-0.5 rounded-lg border border-white/10">
+                <span className="font-bold text-white uppercase font-mono tracking-wider">PREVIEW SYSTEM</span>
+                <span className="text-[10px] text-[#FF2E93] bg-[#FF2E93]/10 px-2 py-0.5 rounded-lg border border-[#FF2E93]/20 font-mono">
                   iPhone 15 Pro
                 </span>
               </div>
 
-              {/* Smartphone Frame (Recreated from Image 2 & Image 3) */}
-              <div className="relative w-[230px] rounded-[36px] p-2.5 bg-gradient-to-b from-[#2B233C] via-[#1A1424] to-[#120D1D] shadow-[0_15px_40px_rgba(0,0,0,0.8)] border border-white/15">
-                {/* Outer bezel line */}
-                <div className="rounded-[30px] bg-[#0E0A17] overflow-hidden p-3 relative min-h-[380px] flex flex-col justify-between">
+              {/* Smartphone Frame */}
+              <div className="relative w-[230px] rounded-[38px] p-2.5 bg-gradient-to-b from-[#3A244D] via-[#1E112A] to-[#100A18] shadow-[0_20px_50px_rgba(0,0,0,0.9)] border border-white/20">
+                {/* Outer Bezel Screen */}
+                <div className="rounded-[30px] bg-[#0A0514] overflow-hidden p-3 relative min-h-[385px] flex flex-col justify-between">
                   {/* Dynamic Island / Status Bar */}
                   <div>
                     <div className="flex items-center justify-between text-[9px] text-white/80 px-1 mb-2 font-mono">
                       <span>9:41</span>
-                      <div className="w-12 h-3 bg-black rounded-full mx-auto" />
+                      <div className="w-12 h-3.5 bg-black rounded-full mx-auto" />
                       <div className="flex items-center gap-1">
                         <span className="w-2.5 h-1.5 border border-white/70 rounded-sm" />
                       </div>
                     </div>
 
-                    {/* App Header (Image 2 Style) */}
+                    {/* App Header */}
                     <div className="flex items-center justify-between mb-3">
-                      <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-[#FF7A59] to-[#E284B3] flex items-center justify-center text-[10px] text-white font-bold">
+                      <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-[#FF2E93] to-[#FF7A00] flex items-center justify-center text-[10px] text-white font-bold">
                         EV
                       </div>
-                      <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/10 text-[9px] text-white/90">
+                      <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-[#FF2E93]/15 border border-[#FF2E93]/30 text-[9px] text-[#FF2E93] font-bold">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                         <span>Live Array</span>
                       </div>
-                      <Bell className="w-3.5 h-3.5 text-[#B5AEC6]" />
+                      <Bell className="w-3.5 h-3.5 text-[#D5CEE0]" />
                     </div>
 
-                    {/* Pill Filter Tabs (from Image 2: "My Courses / Progress") */}
+                    {/* Pill Filter Tabs */}
                     <div className="flex items-center gap-1.5 mb-3 bg-white/[0.04] p-1 rounded-full border border-white/10">
-                      <button className="flex-1 py-1 rounded-full bg-white/10 text-[9px] font-medium text-white shadow-sm text-center">
+                      <button className="flex-1 py-1 rounded-full bg-[#FF2E93]/20 border border-[#FF2E93]/40 text-[9px] font-bold text-white shadow-sm text-center">
                         My Array
                       </button>
-                      <button className="flex-1 py-1 rounded-full text-[9px] text-[#8B839E] text-center">
+                      <button className="flex-1 py-1 rounded-full text-[9px] text-[#A79FB6] text-center font-medium">
                         Yield
                       </button>
                     </div>
 
-                    {/* Hero Card: "AI for Solar Harvest" (Recreated from Image 2) */}
-                    <div className="relative rounded-2xl p-3 mb-2.5 overflow-hidden border border-white/15 bg-gradient-to-b from-[#E284B3]/20 via-[#2A1733]/40 to-[#150D20] shadow-inner">
+                    {/* Hero Card: "AI Solar Harvest" */}
+                    <div className="relative rounded-2xl p-3 mb-2.5 overflow-hidden border border-[#FF2E93]/30 bg-gradient-to-b from-[#FF2E93]/20 via-[#2E1538]/50 to-[#12091A] shadow-inner">
                       {/* Radial Sunset Glow inside card */}
-                      <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-[#FF7A59]/30 blur-xl pointer-events-none" />
+                      <div className="absolute -top-4 -right-4 w-24 h-24 rounded-full bg-[#FF7A00]/40 blur-xl pointer-events-none" />
 
                       <div className="flex items-center justify-between mb-2">
                         <div className="flex -space-x-1.5">
-                          <div className="w-4 h-4 rounded-full bg-[#FF7A59] text-[7px] font-bold text-white flex items-center justify-center">
+                          <div className="w-4 h-4 rounded-full bg-[#FF2E93] text-[7px] font-bold text-white flex items-center justify-center">
                             +1k
                           </div>
                         </div>
@@ -394,16 +427,16 @@ export const PostMasterHero: React.FC = () => {
                         </span>
                       </div>
 
-                      <div className="text-xs font-bold text-white mb-0.5">
+                      <div className="text-xs font-bold text-white mb-0.5 font-['Plus_Jakarta_Sans',sans-serif]">
                         {currentSystem.label.split('(')[0]}
                       </div>
 
-                      <div className="text-[9px] text-[#B5AEC6] mb-2 flex items-center gap-2">
+                      <div className="text-[9px] text-[#D5CEE0] mb-2 flex items-center gap-2 font-mono">
                         <span>⚡ {currentSystem.kw}</span>
                         <span>★ {currentSystem.eff}</span>
                       </div>
 
-                      <div className="flex items-center justify-between text-[8px] text-[#E284B3] font-medium pt-1.5 border-t border-white/10">
+                      <div className="flex items-center justify-between text-[8px] text-[#FF2E93] font-bold pt-1.5 border-t border-white/10">
                         <span>Generation #{generationCount}</span>
                         <span className="flex items-center gap-0.5 hover:underline cursor-pointer">
                           Inspect <ArrowRight className="w-2.5 h-2.5" />
@@ -411,23 +444,23 @@ export const PostMasterHero: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* Daily Progress Ring Card (from Image 2 - right screen) */}
+                    {/* Daily Progress Ring Card */}
                     <div className="rounded-xl p-2 bg-white/[0.03] border border-white/10 mb-2">
-                      <div className="flex items-center justify-between text-[8px] text-[#8B839E] mb-1">
-                        <span>Daily Generation</span>
+                      <div className="flex items-center justify-between text-[8px] text-[#A79FB6] mb-1 font-mono">
+                        <span>DAILY GENERATION</span>
                         <span className="text-emerald-400 font-bold">94%</span>
                       </div>
                       <div className="w-full bg-white/10 rounded-full h-1.5 overflow-hidden">
-                        <div className="bg-gradient-to-r from-[#FF7A59] to-[#E284B3] h-1.5 rounded-full w-[94%]" />
+                        <div className="bg-gradient-to-r from-[#FF2E93] via-[#FF7A00] to-[#FFD166] h-1.5 rounded-full w-[94%]" />
                       </div>
                     </div>
                   </div>
 
-                  {/* Floating Frosted Bottom Dock (from Image 2) */}
-                  <div className="flex items-center justify-around py-1.5 px-3 rounded-full bg-white/[0.08] backdrop-blur-md border border-white/15 text-[#8B839E]">
+                  {/* Floating Frosted Bottom Dock */}
+                  <div className="flex items-center justify-around py-1.5 px-3 rounded-full bg-white/[0.08] backdrop-blur-md border border-white/15 text-[#A79FB6]">
                     <Home className="w-3 h-3 text-white" />
                     <Compass className="w-3 h-3 hover:text-white" />
-                    <Zap className="w-3 h-3 text-[#FF7A59]" />
+                    <Zap className="w-3 h-3 text-[#FF2E93]" />
                     <Settings className="w-3 h-3 hover:text-white" />
                   </div>
                 </div>
@@ -436,18 +469,18 @@ export const PostMasterHero: React.FC = () => {
           </div>
         </motion.div>
 
-        {/* Social Proof Enterprise Logos (from Image 3) */}
+        {/* Social Proof Enterprise Logos */}
         <div className="mt-16 text-center">
-          <p className="text-xs uppercase tracking-widest text-[#7B738D] font-mono mb-8">
-            These industry leaders rely on SolarSense for clean energy intelligence
+          <p className="text-xs uppercase tracking-widest text-[#7E758D] font-mono mb-8 font-bold">
+            THESE INDUSTRY LEADERS RELY ON SOLARSENSE FOR CLEAN ENERGY INTELLIGENCE
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-14 opacity-60 hover:opacity-90 transition-opacity">
-            <span className="text-sm font-bold tracking-widest text-white/80 font-mono">SOLAREDGE</span>
-            <span className="text-sm font-bold tracking-widest text-white/80 font-mono">ENPHASE</span>
-            <span className="text-sm font-bold tracking-widest text-white/80 font-mono">TATA POWER</span>
-            <span className="text-sm font-bold tracking-widest text-white/80 font-mono">SCHNEIDER</span>
-            <span className="text-sm font-bold tracking-widest text-white/80 font-mono">TESLA ENERGY</span>
-            <span className="text-sm font-bold tracking-widest text-white/80 font-mono">SIEMENS</span>
+          <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-14 opacity-75 hover:opacity-100 transition-opacity">
+            <span className="text-sm font-bold tracking-widest text-white/90 font-mono">SOLAREDGE</span>
+            <span className="text-sm font-bold tracking-widest text-white/90 font-mono">ENPHASE</span>
+            <span className="text-sm font-bold tracking-widest text-[#FF2E93] font-mono">TATA POWER</span>
+            <span className="text-sm font-bold tracking-widest text-white/90 font-mono">SCHNEIDER</span>
+            <span className="text-sm font-bold tracking-widest text-[#FF7A00] font-mono">TESLA ENERGY</span>
+            <span className="text-sm font-bold tracking-widest text-[#00F0FF] font-mono">SIEMENS</span>
           </div>
         </div>
       </div>

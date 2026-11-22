@@ -25,28 +25,59 @@ export const LandingNavbar: React.FC = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-sans ${
         scrolled
-          ? 'bg-[#07040E]/90 backdrop-blur-xl border-b border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.6)]'
-          : 'bg-[#07040E]/60 backdrop-blur-md border-b border-white/5'
+          ? 'bg-[#06040C]/95 backdrop-blur-2xl border-b border-[#FF2E93]/20 shadow-[0_10px_35px_rgba(0,0,0,0.8)]'
+          : 'bg-[#06040C]/75 backdrop-blur-md border-b border-white/5'
       }`}
     >
+      {/* Vice City Metro Telemetry Bar */}
+      <div className="bg-[#05030A] border-b border-white/5 text-[11px] text-[#A79FB6] py-1.5 px-4 sm:px-6 lg:px-8 font-mono">
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <span className="flex items-center gap-1.5 text-[#FF2E93] font-bold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF2E93] animate-ping" />
+              <span>LEONIDA POWER GRID // 78°F CLEAR</span>
+            </span>
+            <span className="hidden sm:inline text-white/20">|</span>
+            <span className="hidden sm:inline text-[#D5CEE0] hover:text-white cursor-pointer transition-colors">
+              Vice City Clean Energy Network
+            </span>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <span
+              onClick={() => handleNavClick('#solution-matrix')}
+              className="hover:text-white cursor-pointer transition-colors hidden sm:inline"
+            >
+              Grid Architecture
+            </span>
+            <span className="text-white/20 hidden sm:inline">|</span>
+            <span className="text-[#00F0FF] font-bold">
+              NET-METERING ACTIVE
+            </span>
+          </div>
+        </div>
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Brand Logo (Post Master clean style) */}
+          {/* Brand Logo with GTA VI Sunset Flare */}
           <div
             onClick={() => navigate('/')}
-            className="flex items-center gap-2.5 cursor-pointer group"
+            className="flex items-center gap-3 cursor-pointer group"
           >
-            <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-[#FF7A59] via-[#FF5C8A] to-[#E284B3] flex items-center justify-center shadow-[0_0_18px_rgba(255,122,89,0.35)] group-hover:scale-105 transition-transform">
-              <Sun className="w-4 h-4 text-white" />
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#FF2E93] via-[#FF7A00] to-[#FFD166] flex items-center justify-center shadow-[0_0_22px_rgba(255,46,147,0.5)] group-hover:scale-105 transition-transform">
+              <Sun className="w-5 h-5 text-white" />
             </div>
             <div className="flex items-center gap-1.5">
-              <span className="font-semibold text-lg tracking-tight text-white">SolarSense</span>
-              <span className="text-sm text-[#FF9E79]">✦</span>
+              <span className="font-black text-xl tracking-wider text-white uppercase font-['Plus_Jakarta_Sans',sans-serif]">
+                SOLARSENSE
+              </span>
+              <span className="text-sm text-[#FF7A00]">✦</span>
             </div>
           </div>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8 text-xs font-medium text-[#9A91AB]">
+          <nav className="hidden md:flex items-center gap-8 text-xs font-bold uppercase tracking-wider text-[#A79FB6] font-mono">
             <button
               onClick={() => handleNavClick('#three-steps')}
               className="hover:text-white transition-colors cursor-pointer"
@@ -55,9 +86,9 @@ export const LandingNavbar: React.FC = () => {
             </button>
             <button
               onClick={() => navigate('/portal')}
-              className="hover:text-white transition-colors cursor-pointer flex items-center gap-1 text-[#E284B3]"
+              className="hover:text-[#FF2E93] transition-colors cursor-pointer flex items-center gap-1.5 text-[#FF2E93]"
             >
-              <Sparkles className="w-3 h-3" />
+              <Sparkles className="w-3.5 h-3.5" />
               <span>AI Intelligence</span>
             </button>
             <button
@@ -80,7 +111,7 @@ export const LandingNavbar: React.FC = () => {
             <div className="relative">
               <button
                 onClick={() => setPortalMenuOpen(!portalMenuOpen)}
-                className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-medium text-[#B5AEC6] hover:text-white bg-white/[0.04] border border-white/10 hover:border-white/20 transition-all cursor-pointer"
+                className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-wider text-[#D5CEE0] hover:text-white bg-white/[0.04] border border-white/10 hover:border-[#FF2E93]/40 transition-all cursor-pointer font-mono"
               >
                 <span>Portal Logins</span>
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform ${portalMenuOpen ? 'rotate-180' : ''}`} />
@@ -93,7 +124,7 @@ export const LandingNavbar: React.FC = () => {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.95 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute right-0 mt-2 w-56 rounded-2xl bg-[#120D1D] border border-white/15 p-2 shadow-2xl backdrop-blur-2xl z-50"
+                    className="absolute right-0 mt-2 w-64 rounded-2xl bg-[#120B1F] border border-white/15 p-2.5 shadow-2xl backdrop-blur-2xl z-50"
                   >
                     <button
                       onClick={() => {
@@ -102,12 +133,12 @@ export const LandingNavbar: React.FC = () => {
                       }}
                       className="w-full flex items-center gap-3 p-2.5 rounded-xl text-xs text-left hover:bg-white/[0.06] text-white transition-colors cursor-pointer"
                     >
-                      <div className="w-7 h-7 rounded-lg bg-[#FF7A59]/15 border border-[#FF7A59]/30 flex items-center justify-center text-[#FF7A59]">
-                        <UserCheck className="w-3.5 h-3.5" />
+                      <div className="w-8 h-8 rounded-lg bg-[#FF2E93]/15 border border-[#FF2E93]/30 flex items-center justify-center text-[#FF2E93]">
+                        <UserCheck className="w-4 h-4" />
                       </div>
                       <div>
-                        <div className="font-semibold text-white">Customer Portal</div>
-                        <div className="text-[10px] text-[#8B839E]">AI Recommendations & OCR</div>
+                        <div className="font-bold text-white">Customer Portal</div>
+                        <div className="text-[10px] text-[#A79FB6]">AI Recommendations & OCR</div>
                       </div>
                     </button>
 
@@ -118,12 +149,12 @@ export const LandingNavbar: React.FC = () => {
                       }}
                       className="w-full flex items-center gap-3 p-2.5 rounded-xl text-xs text-left hover:bg-white/[0.06] text-white transition-colors cursor-pointer mt-1"
                     >
-                      <div className="w-7 h-7 rounded-lg bg-[#9B51E0]/15 border border-[#9B51E0]/30 flex items-center justify-center text-[#E284B3]">
-                        <Shield className="w-3.5 h-3.5" />
+                      <div className="w-8 h-8 rounded-lg bg-[#7928CA]/20 border border-[#7928CA]/40 flex items-center justify-center text-[#FF7A00]">
+                        <Shield className="w-4 h-4" />
                       </div>
                       <div>
-                        <div className="font-semibold text-white">Admin Operations</div>
-                        <div className="text-[10px] text-[#8B839E]">Fleet Telemetry & Dispatch</div>
+                        <div className="font-bold text-white">Admin Operations</div>
+                        <div className="text-[10px] text-[#A79FB6]">Fleet Telemetry & Dispatch</div>
                       </div>
                     </button>
                   </motion.div>
@@ -131,10 +162,10 @@ export const LandingNavbar: React.FC = () => {
               </AnimatePresence>
             </div>
 
-            {/* Primary Get Started Free CTA */}
+            {/* Primary Get Started Free CTA with Sunset Gradient */}
             <button
               onClick={() => navigate('/portal')}
-              className="px-5 py-2.5 rounded-full bg-gradient-to-r from-[#FF7A59] via-[#FF5C8A] to-[#E284B3] text-white font-medium text-xs hover:brightness-110 transition-all shadow-[0_4px_20px_rgba(255,122,89,0.3)] cursor-pointer"
+              className="px-6 py-2.5 rounded-full bg-gradient-to-r from-[#FF2E93] via-[#FF7A00] to-[#FFD166] text-white font-bold text-xs uppercase tracking-wider hover:brightness-110 transition-all shadow-[0_4px_22px_rgba(255,46,147,0.35)] hover:scale-105 cursor-pointer"
             >
               Get started for free
             </button>
@@ -144,7 +175,7 @@ export const LandingNavbar: React.FC = () => {
           <div className="flex md:hidden items-center gap-2">
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="p-2 rounded-xl bg-white/[0.04] border border-white/10 text-white"
+              className="p-2.5 rounded-xl bg-white/[0.04] border border-white/10 text-white"
             >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -159,7 +190,7 @@ export const LandingNavbar: React.FC = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-b border-white/10 bg-[#0E0A17] px-4 py-6 space-y-4 text-xs font-medium"
+            className="md:hidden border-b border-white/10 bg-[#0E071A] px-5 py-6 space-y-4 text-xs font-bold uppercase tracking-wider font-mono"
           >
             <button
               onClick={() => handleNavClick('#three-steps')}
@@ -172,7 +203,7 @@ export const LandingNavbar: React.FC = () => {
                 setMobileOpen(false);
                 navigate('/portal');
               }}
-              className="block w-full text-left py-2 text-[#E284B3]"
+              className="block w-full text-left py-2 text-[#FF2E93]"
             >
               AI Solar Intelligence
             </button>
@@ -205,7 +236,7 @@ export const LandingNavbar: React.FC = () => {
                 setMobileOpen(false);
                 navigate('/portal');
               }}
-              className="w-full py-2.5 rounded-full bg-gradient-to-r from-[#FF7A59] to-[#E284B3] text-white font-medium text-xs text-center"
+              className="w-full py-3 rounded-full bg-gradient-to-r from-[#FF2E93] via-[#FF7A00] to-[#FFD166] text-white font-bold text-xs text-center uppercase tracking-wider"
             >
               Get started for free
             </button>
