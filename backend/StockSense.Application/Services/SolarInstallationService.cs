@@ -19,6 +19,9 @@ namespace StockSense.Application.Services
         private static readonly ConcurrentBag<TechnicianJobSheetDto> _jobSheets = new();
         private static readonly ConcurrentBag<SolarSupportTicketDto> _tickets = new();
         private static readonly List<SolarPackageTemplateDto> _packages = new();
+        private static readonly ConcurrentDictionary<string, CustomerAiSubmissionDto> _aiSubmissions = new();
+        private static readonly List<SolarWorkerDto> _workers = new();
+        private static readonly List<WorkerTaskDto> _workerTasks = new();
         private static bool _isSeeded = false;
         private static readonly object _seedLock = new();
 
@@ -39,6 +42,12 @@ namespace StockSense.Application.Services
 
                 // 2. Seed Realistic SunPower Projects representing the exact 6 scenes from the problem statement
                 SeedSunPowerProjects();
+
+                // 3. Seed Realistic Customer AI Camera Reviews & Cost Estimations for Admin Ingestion Matrix
+                SeedAiSubmissions();
+
+                // 4. Seed Workers & Field Tasks (Role-based access: Admin/Leader vs Worker)
+                SeedWorkersAndTasks();
 
                 _isSeeded = true;
             }
@@ -1006,6 +1015,554 @@ namespace StockSense.Application.Services
                 Disclaimer: "IMPORTANT NOTICE: This assessment is an automated preliminary visual estimation powered by Keras MobileNetV2 computer vision models and digital image processing. It is provided strictly for preliminary planning and educational purposes, and does NOT substitute for professional physical measurements, structural load-bearing calculations, or an on-site physical survey conducted by an MNRE-certified solar engineer.",
                 KerasMetadata: new AiRoofKerasMetadataDto("Keras MobileNetV2 (Transfer Learning Feature Extractor)", true, null, "1920x1080")
             );
+        }
+
+        // ==========================================
+        // CUSTOMER AI INGESTION & ADMIN DOSSIER MATRIX
+        // ==========================================
+        private void SeedAiSubmissions()
+        {
+            var now = DateTime.UtcNow;
+
+            // 1. Rajesh Sharma (SUN-2026-001)
+            var p1Cost = new AiSolarEvaluationResponseDto(
+                RecommendedCapacityKw: 3.3,
+                SystemType: "On-Grid (Grid-Tied)",
+                SystemTypeReasoning: "Grid-Tied selected because user power cuts are under 2 hrs/month. Excess daytime generation feeds MSEDCL grid via Bi-directional Net Meter.",
+                AiExplanation: "Based on monthly bill of ₹4,200 (~420 kWh/month) and 450 sq.ft RCC terrace, neural optimization recommends a 3.3 kW On-Grid system with 6x 550W Bifacial TOPCon modules covering 218 sq.ft (48% roof footprint). Annual electricity bill offset is ₹50,400 with full capital payback in 1.9 years under PM Surya Ghar DBT subsidy.",
+                BatteryRecommendation: new AiBatteryRecommendationDto(false, 0, "None Required (Grid Tied)", 0, 0m, "Grid reliability in this sector exceeds 98%. Battery not required."),
+                Financials: new AiFinancialsDto(171600m, 78000m, 93600m, 50400m, 1.9, 1166400m, 4200m),
+                EnvironmentalImpact: new AiEnvironmentalImpactDto(4.1, 186, 1800.0),
+                RoofUtilization: new AiRoofUtilizationDto(218.0, 48.4, 6, "550W Bifacial TOPCon", "Precast Ballast Blocks (15° South Tilt)"),
+                MissingInformationAlerts: new List<AiMissingInformationDto>(),
+                TechnicalConfidenceScore: 98.4,
+                KeyEngineeringHighlights: new List<string>
+                {
+                    "3.3 kW Array (6x 550W Bifacial N-Type TOPCon Panels)",
+                    "SunPower SafeDC™ 1V Auto-Shutdown Inverter",
+                    "₹78,000 Direct PM Surya Ghar DBT Subsidy",
+                    "Annual Clean Energy Offset: 5,040 kWh",
+                    "Net Investment: ₹93,600 with 1.9 yr breakeven"
+                }
+            );
+
+            var p1Camera = new AiRoofPhotoAnalysisResponseDto(
+                RoofType: "Flat Reinforced Cement Concrete (RCC) Terrace",
+                RoofTypeCode: "FLAT_RCC",
+                SlopeCategory: "Flat (1° - 2° Rain Drainage Slope)",
+                ConfidenceScore: 0.96,
+                LoadBearingCapability: "Extremely High (Reinforced concrete slabs withstand up to 450 kg/m²)",
+                RecommendedMounting: "Precast Concrete Ballast Blocks with South-facing 15° Elevation Legs",
+                ObstructionsDetected: new List<AiRoofObstructionDto>
+                {
+                    new("Overhead Water Storage Tank (500L PVC)", "Medium", 32, 1.5, "Array placed on South-West sector keeping 1.5m clearance to prevent shadow cast."),
+                    new("Parapet Boundary Wall (3 ft)", "Low", 18, 0.8, "Standard 0.8m edge margin maintained for aerodynamic wind pressure relief.")
+                },
+                TotalObstructionsCount: 2,
+                ShadingAnalysis: new AiRoofShadingDto("Negligible Shading (< 5%)", 3.8, "Over 96% annual solar radiance accessible between 9 AM and 4:30 PM.", "Center-South Zone"),
+                Suitability: new AiRoofSuitabilityDto(94, "EXCELLENT // PRIME SOLAR CANDIDATE", "#10B981", 86.2, "3.0 kW - 4.5 kW"),
+                InstallationConcerns: new List<AiRoofInstallationConcernDto>
+                {
+                    new("Waterproofing Membrane Preservation", "Terrace epoxy coating intact.", "Use rubber-cushioned ballast block footings to prevent puncturing."),
+                    new("Wind Zone Compliance", "Zone III (Pune ~39 m/s).", "HDGI structure with stainless steel A2-70 fasteners.")
+                },
+                AssessmentSummary: "Keras MobileNetV2 verified a pristine Flat RCC terrace with minimal shading (3.8%). 86.2% usable solar area. Suitability rating is 94/100. Ideal for 3.3 kW On-Grid system.",
+                Disclaimer: "Preliminary automated visual assessment via Keras MobileNetV2. Does not replace physical site survey.",
+                KerasMetadata: new AiRoofKerasMetadataDto("Keras MobileNetV2 (Transfer Learning Feature Extractor)", true, null, "1920x1080")
+            );
+
+            _aiSubmissions["SUN-2026-001"] = new CustomerAiSubmissionDto(
+                Id: "AI-SUB-101",
+                ProjectId: 101,
+                ProjectNumber: "SUN-2026-001",
+                CustomerName: "Rajesh Sharma",
+                Phone: "+91 98220 12345",
+                Address: "Flat 402, Green Meadows, Baner, Pune",
+                SubmittedAt: now.AddDays(-2),
+                CostEstimation: p1Cost,
+                CameraReview: p1Camera,
+                RoofPhotoPreviewUrl: "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=800&auto=format&fit=crop&q=80",
+                Status: "Commissioned & Net Metering Active"
+            );
+
+            // 2. Amit Verma (SUN-2026-002)
+            var p2Cost = new AiSolarEvaluationResponseDto(
+                RecommendedCapacityKw: 5.5,
+                SystemType: "Off-Grid (Hybrid Solar + 10.24 kWh LFP Storage)",
+                SystemTypeReasoning: "Hybrid architecture chosen due to frequent grid instability in industrial cluster. System features dual MPPT and UPS-grade <10ms automatic switchover.",
+                AiExplanation: "For monthly consumption of ~750 kWh (₹6,800/mo bill) and 650 sq.ft roof, a 5.5 kW Hybrid system with 10x 550W modules and 10.24 kWh Lithium storage provides 100% outage protection and ₹81,600/yr bill savings.",
+                BatteryRecommendation: new AiBatteryRecommendationDto(true, 10.24, "SunPower LiFePO4 Lithium", 8.5, 124000m, "Powers essential industrial load (computers, lighting, routers, packaging) for 8.5 hours uninterrupted during power cuts."),
+                Financials: new AiFinancialsDto(390000m, 0m, 390000m, 81600m, 4.8, 1650000m, 6800m),
+                EnvironmentalImpact: new AiEnvironmentalImpactDto(6.8, 309, 3100.0),
+                RoofUtilization: new AiRoofUtilizationDto(360.0, 55.4, 10, "550W Bifacial TOPCon", "Short-Rail Sheet Clamps"),
+                MissingInformationAlerts: new List<AiMissingInformationDto>(),
+                TechnicalConfidenceScore: 96.0,
+                KeyEngineeringHighlights: new List<string>
+                {
+                    "5.5 kW High-Yield Solar Array (10x 550W TOPCon Modules)",
+                    "10.24 kWh LiFePO4 Battery Bank with 6,000 Cycle Life",
+                    "<10ms Instant UPS Outage Switchover",
+                    "Annual Cost Reduction: ₹81,600"
+                }
+            );
+
+            var p2Camera = new AiRoofPhotoAnalysisResponseDto(
+                RoofType: "Industrial Metal Deck Shed / Terrace",
+                RoofTypeCode: "METAL_TRAPEZOIDAL",
+                SlopeCategory: "Sloped (7° - 10° Natural Water Shed)",
+                ConfidenceScore: 0.93,
+                LoadBearingCapability: "High (Rigid steel purlins and roof trusses)",
+                RecommendedMounting: "Anodized Aluminum Short-Rail Clamps with EPDM Leak-Proof Washers",
+                ObstructionsDetected: new List<AiRoofObstructionDto>
+                {
+                    new("Industrial Exhaust Vent Cowl", "Medium", 28, 1.2, "Maintain 1.2m setback around air exhaust."),
+                    new("HVAC Condenser Unit", "High", 48, 2.0, "Maintain 2.0m South-facing clearance for maintenance access.")
+                },
+                TotalObstructionsCount: 2,
+                ShadingAnalysis: new AiRoofShadingDto("Moderate Perimeter Shadows", 8.4, "Shadows cleared by 10 AM, zero obstruction on main shed face.", "Upper North Slope"),
+                Suitability: new AiRoofSuitabilityDto(89, "HIGH FEASIBILITY // INDUSTRIAL CANDIDATE", "#3B82F6", 78.5, "5.0 kW - 8.0 kW"),
+                InstallationConcerns: new List<AiRoofInstallationConcernDto>
+                {
+                    new("Penetration Sealing", "Shed sheet water tightness.", "EPDM gasket self-tapping screws with neutral silicone sealant."),
+                    new("Thermal Expansion", "Metal sheets expand in summer.", "Thermal break expansion joints every 6 panels.")
+                },
+                AssessmentSummary: "Metal shed deck identified with 7° tilt. Keras model confirms strong purlin support with 78.5% usable area. Suitability rating 89/100.",
+                Disclaimer: "Preliminary automated visual assessment via Keras MobileNetV2. Does not replace physical site survey.",
+                KerasMetadata: new AiRoofKerasMetadataDto("Keras MobileNetV2 (Transfer Learning Feature Extractor)", true, null, "1920x1080")
+            );
+
+            _aiSubmissions["SUN-2026-002"] = new CustomerAiSubmissionDto(
+                Id: "AI-SUB-102",
+                ProjectId: 102,
+                ProjectNumber: "SUN-2026-002",
+                CustomerName: "Amit Verma",
+                Phone: "+91 98450 77112",
+                Address: "Plot 12, Bhosari Industrial Area, Pune",
+                SubmittedAt: now.AddDays(-1),
+                CostEstimation: p2Cost,
+                CameraReview: p2Camera,
+                RoofPhotoPreviewUrl: "https://images.unsplash.com/photo-1508873696983-2df5293cb32f?w=800&auto=format&fit=crop&q=80",
+                Status: "Hardware Dispatched & Installation Scheduled"
+            );
+
+            // 3. Anita Deshmukh (SUN-2026-003)
+            var p3Cost = new AiSolarEvaluationResponseDto(
+                RecommendedCapacityKw: 4.0,
+                SystemType: "On-Grid (Grid-Tied)",
+                SystemTypeReasoning: "Grid-Tied recommended to maximize PM Surya Ghar direct cash subsidy benefits and eliminate battery replacement costs.",
+                AiExplanation: "Anita's ₹5,100/mo electricity bill corresponds to 510 kWh/month. Recommended 4.0 kW system generates 6,000 kWh annually, qualifying for ₹78,000 maximum Central DBT subsidy and achieving ₹61,200 annual savings.",
+                BatteryRecommendation: new AiBatteryRecommendationDto(false, 0, "None Required", 0, 0m, "Continuous grid uptime; net-metering maximizes return."),
+                Financials: new AiFinancialsDto(208000m, 78000m, 130000m, 61200m, 2.1, 1395000m, 5100m),
+                EnvironmentalImpact: new AiEnvironmentalImpactDto(5.0, 227, 2200.0),
+                RoofUtilization: new AiRoofUtilizationDto(264.0, 52.8, 7, "580W Bifacial TOPCon", "Elevated Stilt Racks (6 ft clearance)"),
+                MissingInformationAlerts: new List<AiMissingInformationDto>(),
+                TechnicalConfidenceScore: 99.1,
+                KeyEngineeringHighlights: new List<string>
+                {
+                    "4.0 kW Array (7x 580W TOPCon Modules)",
+                    "Direct Central Subsidy: ₹78,000 via PFMS/DBT",
+                    "Net Investment: ₹1,30,000 (Payback: 2.1 Years)",
+                    "Lifetime Electricity Savings: ₹13,95,000"
+                }
+            );
+
+            var p3Camera = new AiRoofPhotoAnalysisResponseDto(
+                RoofType: "Flat Reinforced Cement Concrete (RCC) Terrace",
+                RoofTypeCode: "FLAT_RCC",
+                SlopeCategory: "Flat (0° - 1° Level Surface)",
+                ConfidenceScore: 0.98,
+                LoadBearingCapability: "Extremely High (Standard RCC Slab)",
+                RecommendedMounting: "HDGI Elevated Stilt Racks (6 ft clearance for walking)",
+                ObstructionsDetected: new List<AiRoofObstructionDto>
+                {
+                    new("Small Rooftop Staircase Mumty", "Low", 15, 1.0, "Shadow falls purely North; zero impact on South solar array.")
+                },
+                TotalObstructionsCount: 1,
+                ShadingAnalysis: new AiRoofShadingDto("Zero Obstruction Shading (99.2% Exposure)", 1.2, "Uninterrupted clear solar path from sunrise to sunset.", "Entire Rooftop"),
+                Suitability: new AiRoofSuitabilityDto(97, "OUTSTANDING // 5-STAR ROOF CANDIDATE", "#10B981", 92.4, "4.0 kW - 6.5 kW"),
+                InstallationConcerns: new List<AiRoofInstallationConcernDto>
+                {
+                    new("Elevated Stilt Racks", "Customer requested walking space under panels.", "Elevated 6.5 ft structure with diagonal wind bracings.")
+                },
+                AssessmentSummary: "Exceptional flat RCC roof with 99.2% clear sun exposure. Mumty shadow falls harmlessly North. Usable area 92.4%. Feasibility Score 97/100.",
+                Disclaimer: "Preliminary automated visual assessment via Keras MobileNetV2. Does not replace physical site survey.",
+                KerasMetadata: new AiRoofKerasMetadataDto("Keras MobileNetV2 (Transfer Learning Feature Extractor)", true, null, "1920x1080")
+            );
+
+            _aiSubmissions["SUN-2026-003"] = new CustomerAiSubmissionDto(
+                Id: "AI-SUB-103",
+                ProjectId: 103,
+                ProjectNumber: "SUN-2026-003",
+                CustomerName: "Anita Deshmukh",
+                Phone: "+91 97630 44556",
+                Address: "Bungalow 7, Kothrud, Pune",
+                SubmittedAt: now.AddHours(-14),
+                CostEstimation: p3Cost,
+                CameraReview: p3Camera,
+                RoofPhotoPreviewUrl: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&auto=format&fit=crop&q=80",
+                Status: "Feasibility Approved // Engineering Design Ready"
+            );
+
+            // 4. Apex Precision Tools (SUN-2026-004)
+            var p4Cost = new AiSolarEvaluationResponseDto(
+                RecommendedCapacityKw: 15.0,
+                SystemType: "Commercial On-Grid (LT / HT Synchronized)",
+                SystemTypeReasoning: "High commercial daytime tariff (₹12.50/unit) makes synchronized commercial grid-tie yield 40% accelerated tax depreciation and 2.2 yr payback.",
+                AiExplanation: "Commercial facility with ₹28,000/mo electricity bill and 1,800 sq.ft shed roof. 15 kW system saves ₹3,36,000 annually with 100% tax depreciation benefits.",
+                BatteryRecommendation: new AiBatteryRecommendationDto(false, 0, "Commercial Grid Tied", 0, 0m, "Synchronized to industrial diesel generator & HT grid."),
+                Financials: new AiFinancialsDto(780000m, 0m, 780000m, 336000m, 2.3, 7200000m, 28000m),
+                EnvironmentalImpact: new AiEnvironmentalImpactDto(18.6, 845, 8400.0),
+                RoofUtilization: new AiRoofUtilizationDto(990.0, 55.0, 27, "550W Tier-1 Bifacial", "Standing Seam Non-Penetrative Clamps"),
+                MissingInformationAlerts: new List<AiMissingInformationDto>(),
+                TechnicalConfidenceScore: 97.5,
+                KeyEngineeringHighlights: new List<string>
+                {
+                    "15 kW Commercial High-Efficiency Solar Array",
+                    "40% Accelerated Tax Depreciation Benefit",
+                    "Annual Cost Reduction: ₹3,36,000",
+                    "Net Breakeven in 2.3 Years"
+                }
+            );
+
+            var p4Camera = new AiRoofPhotoAnalysisResponseDto(
+                RoofType: "Industrial Trapezoidal Standing Seam Shed",
+                RoofTypeCode: "METAL_TRAPEZOIDAL",
+                SlopeCategory: "Sloped (8° South Slope)",
+                ConfidenceScore: 0.95,
+                LoadBearingCapability: "Very High (Structural I-Beams)",
+                RecommendedMounting: "Standing Seam Non-Penetrative Clamps",
+                ObstructionsDetected: new List<AiRoofObstructionDto>
+                {
+                    new("Turbine Roof Ventilators (6 units)", "Low", 12, 1.0, "Mounted in ridges between panels without shadow casting.")
+                },
+                TotalObstructionsCount: 1,
+                ShadingAnalysis: new AiRoofShadingDto("Zero Shading (100% Clear)", 0.5, "Clear industrial horizon with zero nearby trees or towers.", "Full Roof Surface"),
+                Suitability: new AiRoofSuitabilityDto(96, "OUTSTANDING INDUSTRIAL CANDIDATE", "#10B981", 90.0, "15 kW - 25 kW"),
+                InstallationConcerns: new List<AiRoofInstallationConcernDto>
+                {
+                    new("Lightning Protection & Surge Arrestors", "High metal shed profile.", "Class I + II SPD with dedicated chemical earthing pits.")
+                },
+                AssessmentSummary: "Standing seam metal roof with optimal 8° South tilt and zero shading. Non-penetrative clamps preserve roof warranty. Feasibility 96/100.",
+                Disclaimer: "Preliminary automated visual assessment via Keras MobileNetV2. Does not replace physical site survey.",
+                KerasMetadata: new AiRoofKerasMetadataDto("Keras MobileNetV2 (Transfer Learning Feature Extractor)", true, null, "1920x1080")
+            );
+
+            _aiSubmissions["SUN-2026-004"] = new CustomerAiSubmissionDto(
+                Id: "AI-SUB-104",
+                ProjectId: 104,
+                ProjectNumber: "SUN-2026-004",
+                CustomerName: "Apex Precision Tools (Vikas Patil)",
+                Phone: "+91 99220 88990",
+                Address: "Gat 48, MIDC Chakan, Pune",
+                SubmittedAt: now.AddHours(-6),
+                CostEstimation: p4Cost,
+                CameraReview: p4Camera,
+                RoofPhotoPreviewUrl: "https://images.unsplash.com/photo-1541888946425-d0fbb186c5f7?w=800&auto=format&fit=crop&q=80",
+                Status: "Inquiry Ingested // Site Feasibility Scheduled"
+            );
+        }
+
+        public Task<List<CustomerAiSubmissionDto>> GetCustomerAiSubmissionsAsync()
+        {
+            EnsureSeedData();
+            var list = _aiSubmissions.Values.OrderByDescending(s => s.SubmittedAt).ToList();
+            return Task.FromResult(list);
+        }
+
+        public Task<CustomerAiSubmissionDto?> GetCustomerAiSubmissionAsync(string identifier)
+        {
+            EnsureSeedData();
+            if (string.IsNullOrWhiteSpace(identifier)) return Task.FromResult<CustomerAiSubmissionDto?>(null);
+
+            var found = _aiSubmissions.Values.FirstOrDefault(s =>
+                string.Equals(s.Id, identifier, StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(s.ProjectNumber, identifier, StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(s.Phone, identifier, StringComparison.OrdinalIgnoreCase) ||
+                s.CustomerName.Contains(identifier, StringComparison.OrdinalIgnoreCase));
+
+            return Task.FromResult(found);
+        }
+
+        public Task<CustomerAiSubmissionDto> SaveCustomerAiSubmissionAsync(SaveCustomerAiSubmissionDto dto)
+        {
+            EnsureSeedData();
+
+            string key = !string.IsNullOrEmpty(dto.ProjectNumber)
+                ? dto.ProjectNumber
+                : (!string.IsNullOrEmpty(dto.Phone) ? dto.Phone : Guid.NewGuid().ToString("N"));
+
+            _aiSubmissions.TryGetValue(key, out var existing);
+
+            var mergedCost = dto.CostEstimation ?? existing?.CostEstimation;
+            var mergedCamera = dto.CameraReview ?? existing?.CameraReview;
+            var preview = !string.IsNullOrEmpty(dto.RoofPhotoPreviewUrl) ? dto.RoofPhotoPreviewUrl : existing?.RoofPhotoPreviewUrl;
+
+            var submission = new CustomerAiSubmissionDto(
+                Id: existing?.Id ?? $"AI-SUB-{DateTime.UtcNow.Ticks.ToString()[^6..]}",
+                ProjectId: dto.ProjectId ?? existing?.ProjectId,
+                ProjectNumber: dto.ProjectNumber ?? existing?.ProjectNumber,
+                CustomerName: !string.IsNullOrWhiteSpace(dto.CustomerName) ? dto.CustomerName : (existing?.CustomerName ?? "Customer Prospect"),
+                Phone: !string.IsNullOrWhiteSpace(dto.Phone) ? dto.Phone : (existing?.Phone ?? "+91 98765 43210"),
+                Address: !string.IsNullOrWhiteSpace(dto.Address) ? dto.Address : (existing?.Address ?? "Pune, Maharashtra"),
+                SubmittedAt: DateTime.UtcNow,
+                CostEstimation: mergedCost,
+                CameraReview: mergedCamera,
+                RoofPhotoPreviewUrl: preview,
+                Status: "Live Ingestion // AI Assessed"
+            );
+
+            _aiSubmissions[key] = submission;
+            return Task.FromResult(submission);
+        }
+
+        // ==========================================
+        // WORKER PORTAL & FLEET TASK MANAGEMENT
+        // ==========================================
+        private void SeedWorkersAndTasks()
+        {
+            var now = DateTime.UtcNow;
+
+            // 1. Seed 4 Verified Technicians / Crew Members
+            if (_workers.Count == 0)
+            {
+                _workers.AddRange(new List<SolarWorkerDto>
+                {
+                    new(1, "WRK-001", "Manoj Shinde", "+91 98221 00101", "CrewLeader", "Lead Solar Engineer & Inverter Commissioning", "Active", 2, 48, 4.95, now.AddYears(-2)),
+                    new(2, "WRK-002", "Suresh Jadhav", "+91 98451 00202", "CrewLeader", "Hybrid Battery Storage & Industrial Master Electrician", "OnField", 2, 35, 4.88, now.AddYears(-1)),
+                    new(3, "WRK-003", "Ramesh Patil", "+91 97631 00303", "FieldTechnician", "Rooftop Racking, Module Mounting & SafeDC™ 1V Wiring", "Active", 2, 29, 4.92, now.AddMonths(-10)),
+                    new(4, "WRK-004", "Vikram Solanki", "+91 99221 00404", "SolarRoofer", "Elevated Ballast Structures & High-Altitude Structural Rigging", "Active", 1, 21, 4.85, now.AddMonths(-6))
+                });
+            }
+
+            // 2. Seed Field Tasks across Projects
+            if (_workerTasks.Count == 0)
+            {
+                _workerTasks.AddRange(new List<WorkerTaskDto>
+                {
+                    // Manoj Shinde tasks (Worker 1)
+                    new(
+                        1, "TSK-101", 101, "SUN-2026-001", "Rajesh Sharma", "+91 98220 12345", "Flat 402, Green Meadows, Baner, Pune",
+                        1, "Manoj Shinde", "CrewLeader", "PreCommissioningAudit", "Completed",
+                        now.AddDays(-1), 3.0, "On-Grid",
+                        new List<string> { "Module tilt check 15° verified", "SafeDC 1V string auto-shutdown verified", "Earth pit resistance < 2.0 Ohms", "Bi-directional net-meter sync confirmed" },
+                        "Earthing tested 1.4 Ohms. Customer signed digital handover sheet. System successfully feeding grid.",
+                        3.14, 238.2, "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='40'><path d='M10,20 Q40,5 80,30' stroke='black' fill='none'/></svg>",
+                        now.AddDays(-1)
+                    ),
+                    new(
+                        2, "TSK-102", 103, "SUN-2026-003", "Anita Deshmukh", "+91 97630 44556", "Bungalow 7, Kothrud, Pune",
+                        1, "Manoj Shinde", "CrewLeader", "RoofMounting", "InProgress",
+                        now.AddHours(-2), 4.0, "On-Grid",
+                        new List<string> { "Anchor bolt torque verified", "7x 580W TOPCon layout verification", "Stilt rack wind bracing installed", "Chemical earthing pit inspection" },
+                        "Elevated 6.5 ft structure secured. Racking aligned to 180° true south.",
+                        null, null, null, null
+                    ),
+
+                    // Suresh Jadhav tasks (Worker 2)
+                    new(
+                        3, "TSK-103", 102, "SUN-2026-002", "Amit Verma", "+91 98450 77112", "Plot 12, Bhosari Industrial Area, Pune",
+                        2, "Suresh Jadhav", "CrewLeader", "InverterWiring", "InProgress",
+                        now.AddHours(-4), 5.0, "Off-Grid",
+                        new List<string> { "10.24 kWh LiFePO4 battery rack mounted", "Dual MPPT DC wiring completed", "<10ms UPS switchover latency test", "Fire safety isolator box labeled" },
+                        "Dual LFP packs connected in parallel. Battery BMS communication verified over CAN bus.",
+                        null, null, null, null
+                    ),
+                    new(
+                        4, "TSK-104", 104, "SUN-2026-004", "Apex Precision Tools", "+91 99220 88990", "Gat 48, MIDC Chakan, Pune",
+                        2, "Suresh Jadhav", "CrewLeader", "PreCommissioningAudit", "Assigned",
+                        now.AddDays(1), 15.0, "On-Grid",
+                        new List<string> { "HT synchronizer audit", "Class I + II SPD surge suppressor check", "Commercial bi-directional net meter seal verification", "Emergency touch-safe shutdown test" },
+                        "Scheduled for 15 kW commercial factory commissioning tomorrow morning at 09:30 AM.",
+                        null, null, null, null
+                    ),
+
+                    // Ramesh Patil tasks (Worker 3 - Field Technician)
+                    new(
+                        5, "TSK-105", 101, "SUN-2026-001", "Rajesh Sharma", "+91 98220 12345", "Flat 402, Green Meadows, Baner, Pune",
+                        3, "Ramesh Patil", "FieldTechnician", "SupportTicketVisit", "EnRoute",
+                        now.AddMinutes(-30), 3.0, "On-Grid",
+                        new List<string> { "Inspect Inverter DC surge suppressor card", "Measure DC string isolation resistance", "Replace MOV cartridge under 2-Yr free warranty", "Customer satisfaction signature" },
+                        "En route with replacement SPD module SP-MOV-1000V. Estimated arrival in 15 mins.",
+                        null, null, null, null
+                    ),
+                    new(
+                        6, "TSK-106", 103, "SUN-2026-003", "Anita Deshmukh", "+91 97630 44556", "Bungalow 7, Kothrud, Pune",
+                        3, "Ramesh Patil", "FieldTechnician", "RoofMounting", "Assigned",
+                        now.AddDays(1), 4.0, "On-Grid",
+                        new List<string> { "Elevated stilt safety harness anchorage", "Module clamp torque 12 Nm", "Conduit UV protection seal", "MC4 connector crimp verification" },
+                        "Scheduled to assist crew with rooftop elevated panel clamping.",
+                        null, null, null, null
+                    ),
+
+                    // Vikram Solanki task (Worker 4 - Structural Rigger)
+                    new(
+                        7, "TSK-107", 104, "SUN-2026-004", "Apex Precision Tools", "+91 99220 88990", "Gat 48, MIDC Chakan, Pune",
+                        4, "Vikram Solanki", "SolarRoofer", "RoofMounting", "Assigned",
+                        now.AddDays(2), 15.0, "On-Grid",
+                        new List<string> { "Standing seam non-penetrative clamp inspection", "Purlin load test verification", "Wind deflector plates mounting" },
+                        "Industrial shed mounting inspection.",
+                        null, null, null, null
+                    )
+                });
+            }
+        }
+
+        public Task<List<SolarWorkerDto>> GetWorkersAsync()
+        {
+            EnsureSeedData();
+            lock (_workers)
+            {
+                // Recalculate tasks counts
+                var list = _workers.Select(w =>
+                {
+                    int assigned = _workerTasks.Count(t => t.AssignedWorkerId == w.Id && t.Status != "Completed");
+                    int completed = _workerTasks.Count(t => t.AssignedWorkerId == w.Id && t.Status == "Completed");
+                    return w with { AssignedTasksCount = assigned, CompletedTasksCount = w.CompletedTasksCount + completed };
+                }).OrderBy(w => w.Id).ToList();
+
+                return Task.FromResult(list);
+            }
+        }
+
+        public Task<SolarWorkerDto> CreateWorkerAsync(CreateSolarWorkerDto dto)
+        {
+            EnsureSeedData();
+            lock (_workers)
+            {
+                int newId = _workers.Count > 0 ? _workers.Max(w => w.Id) + 1 : 1;
+                var worker = new SolarWorkerDto(
+                    Id: newId,
+                    WorkerCode: $"WRK-{newId:D3}",
+                    FullName: dto.FullName,
+                    Phone: dto.Phone,
+                    Role: !string.IsNullOrWhiteSpace(dto.Role) ? dto.Role : "FieldTechnician",
+                    Specialization: !string.IsNullOrWhiteSpace(dto.Specialization) ? dto.Specialization : "Solar Rooftop Installation",
+                    Status: "Active",
+                    AssignedTasksCount: 0,
+                    CompletedTasksCount: 0,
+                    Rating: 5.0,
+                    JoinedAt: DateTime.UtcNow
+                );
+
+                _workers.Add(worker);
+                return Task.FromResult(worker);
+            }
+        }
+
+        public Task<List<WorkerTaskDto>> GetWorkerTasksAsync(int? workerId = null)
+        {
+            EnsureSeedData();
+            lock (_workerTasks)
+            {
+                // If a specific workerId is supplied, STRICTLY return ONLY tasks assigned to that worker!
+                // Admin calls with null/empty workerId to view all tasks across the company.
+                var query = _workerTasks.AsEnumerable();
+                if (workerId.HasValue && workerId.Value > 0)
+                {
+                    query = query.Where(t => t.AssignedWorkerId == workerId.Value);
+                }
+
+                var list = query.OrderByDescending(t => t.ScheduledDate).ToList();
+                return Task.FromResult(list);
+            }
+        }
+
+        public Task<WorkerTaskDto> AssignWorkerTaskAsync(AssignWorkerTaskDto dto)
+        {
+            EnsureSeedData();
+            lock (_workerTasks)
+            {
+                var worker = _workers.FirstOrDefault(w => w.Id == dto.WorkerId);
+                var project = _projects.FirstOrDefault(p => p.ProjectId == dto.ProjectId);
+
+                int newId = _workerTasks.Count > 0 ? _workerTasks.Max(t => t.Id) + 1 : 1;
+                var task = new WorkerTaskDto(
+                    Id: newId,
+                    TaskCode: $"TSK-{newId + 100}",
+                    ProjectId: dto.ProjectId,
+                    ProjectNumber: project?.ProjectNumber ?? $"SUN-2026-{dto.ProjectId:D3}",
+                    CustomerName: project?.CustomerName ?? "Solar Homeowner",
+                    CustomerPhone: project?.Phone ?? "+91 98220 12345",
+                    CustomerAddress: project?.Address ?? "Pune, Maharashtra",
+                    AssignedWorkerId: dto.WorkerId,
+                    AssignedWorkerName: worker?.FullName ?? "Field Technician",
+                    AssignedWorkerRole: worker?.Role ?? "FieldTechnician",
+                    TaskType: dto.TaskType,
+                    Status: "Assigned",
+                    ScheduledDate: dto.ScheduledDate != default ? dto.ScheduledDate : DateTime.UtcNow.AddDays(1),
+                    SystemCapacityKw: project?.SystemCapacityKw ?? 3.0,
+                    SystemType: project?.SystemType.ToString() ?? "OnGrid",
+                    ChecklistItems: new List<string>
+                    {
+                        "Safety harness and PPE inspection",
+                        "Structural ballast & tilt verification",
+                        "SafeDC™ 1V rapid shutdown test",
+                        "Customer sign-off & commissioning"
+                    },
+                    Notes: dto.Notes,
+                    TestedKw: null,
+                    TestedVoltage: null,
+                    CustomerSignatureBase64: null,
+                    CompletedAt: null
+                );
+
+                _workerTasks.Add(task);
+                return Task.FromResult(task);
+            }
+        }
+
+        public Task<WorkerTaskDto> UpdateWorkerTaskStatusAsync(int taskId, UpdateWorkerTaskStatusDto dto)
+        {
+            EnsureSeedData();
+            lock (_workerTasks)
+            {
+                var idx = _workerTasks.FindIndex(t => t.Id == taskId);
+                if (idx < 0)
+                {
+                    throw new KeyNotFoundException($"Worker task with ID {taskId} not found.");
+                }
+
+                var existing = _workerTasks[idx];
+                var updated = existing with
+                {
+                    Status = dto.Status,
+                    Notes = !string.IsNullOrWhiteSpace(dto.Notes) ? dto.Notes : existing.Notes,
+                    TestedKw = dto.TestedKw ?? existing.TestedKw,
+                    TestedVoltage = dto.TestedVoltage ?? existing.TestedVoltage,
+                    CustomerSignatureBase64 = !string.IsNullOrWhiteSpace(dto.CustomerSignatureBase64) ? dto.CustomerSignatureBase64 : existing.CustomerSignatureBase64,
+                    CompletedAt = dto.Status == "Completed" ? DateTime.UtcNow : existing.CompletedAt
+                };
+
+                _workerTasks[idx] = updated;
+
+                // If completed, also register in JobSheets if not already present
+                if (dto.Status == "Completed" && !_jobSheets.Any(j => j.ProjectId == updated.ProjectId))
+                {
+                    var js = new TechnicianJobSheetDto(
+                        Id: _jobSheets.Count + 1,
+                        ProjectId: updated.ProjectId,
+                        ProjectNumber: updated.ProjectNumber,
+                        CustomerName: updated.CustomerName,
+                        Address: updated.CustomerAddress,
+                        LeadTechnician: updated.AssignedWorkerName,
+                        WorkStartTime: DateTime.UtcNow.AddHours(-3),
+                        WorkEndTime: DateTime.UtcNow,
+                        SystemSizeKw: updated.SystemCapacityKw,
+                        PowerGenerationTestPassed: true,
+                        TestedKwOutput: updated.TestedKw ?? (updated.SystemCapacityKw * 0.95),
+                        TestedVoltage: updated.TestedVoltage ?? 238.4,
+                        RoofPhotos: new List<string> { "/images/solar-roof-finished.jpg", "/images/inverter-mounted.jpg" },
+                        CustomerSignatureBase64: updated.CustomerSignatureBase64 ?? "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='30'><path d='M5,15 Q30,5 60,20' stroke='black' fill='none'/></svg>",
+                        HomeownerName: updated.CustomerName,
+                        SignedAt: DateTime.UtcNow,
+                        HandoverCertificateNumber: $"HC-SUN-{DateTime.UtcNow.Year}-{updated.Id:D4}",
+                        Notes: updated.Notes ?? "Completed by field technician."
+                    );
+                    _jobSheets.Add(js);
+                }
+
+                return Task.FromResult(updated);
+            }
         }
     }
 

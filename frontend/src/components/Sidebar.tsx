@@ -4,7 +4,7 @@ import {
   LayoutDashboard, Package, Boxes, ArrowDownLeft, ArrowUpRight, ArrowLeftRight,
   SlidersHorizontal, History, Building2, Settings, User as UserIcon, LogOut,
   ChevronDown, ChevronRight, Layers, TrendingUp, ShieldAlert, Bot,
-  Truck, FileBarChart2, BarChart3, Bell, Menu, X, Sun, Compass, Wrench, QrCode, ClipboardCheck, LifeBuoy, DollarSign, ExternalLink, Zap
+  Truck, FileBarChart2, BarChart3, Bell, Menu, X, Sun, Compass, Wrench, QrCode, ClipboardCheck, LifeBuoy, DollarSign, ExternalLink, Zap, HardHat
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { UserRole } from '../types';
@@ -147,6 +147,19 @@ export const Sidebar: React.FC = () => {
                   }`}
                 >
                   <DollarSign className="w-4 h-4 text-[#F5B895]" /> <span>6. Director Month-End</span>
+                </NavLink>
+
+                {/* Dedicated Workers & Field Crew Portal (Role-governed) */}
+                <NavLink 
+                  to="/workers" 
+                  onClick={() => setMobileOpen(false)} 
+                  className={({ isActive }) => `flex items-center justify-between px-3 py-2 rounded-2xl text-xs font-bold text-white bg-gradient-to-r from-pink-500/20 to-purple-600/20 border border-pink-500/35 hover:border-pink-400 transition-all mt-2 shadow-[0_0_18px_rgba(236,72,153,0.2)] group ${isActive ? 'ring-1 ring-pink-400 font-black' : ''}`}
+                >
+                  <span className="flex items-center gap-2 font-mono text-[11px]">
+                    <HardHat className="w-3.5 h-3.5 text-pink-400 group-hover:scale-110 transition-transform" />
+                    <span>Workers Portal</span>
+                  </span>
+                  <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-pink-500/30 text-pink-200 font-mono">ROLE</span>
                 </NavLink>
                 
                 {/* Direct Link to Customer Solar Vault */}

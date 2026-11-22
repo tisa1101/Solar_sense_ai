@@ -44,6 +44,7 @@ import { SolarDispatchPage } from '../pages/SolarDispatchPage';
 import { SolarJobSheetPage } from '../pages/SolarJobSheetPage';
 import { SolarSupportPage } from '../pages/SolarSupportPage';
 import { SolarDirectorPage } from '../pages/SolarDirectorPage';
+import { WorkerPortalPage } from '../pages/WorkerPortalPage';
 
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { isAuthenticated } = useAuth();
@@ -61,6 +62,10 @@ export const AppRoutes: React.FC = () => {
       {/* Dedicated Customer / User Portal (Accessible to Homeowners & Commercial Clients) */}
       <Route path="/portal" element={<CustomerPortalPage />} />
       <Route path="/portal/login" element={<CustomerLoginPage />} />
+
+      {/* Dedicated Workers & Field Crew Portal (Role-governed: Admin/Leader vs Worker) */}
+      <Route path="/workers" element={<WorkerPortalPage />} />
+      <Route path="/worker-portal" element={<WorkerPortalPage />} />
 
       {/* Public Auth Routes */}
       <Route element={<AuthLayout />}>
@@ -86,6 +91,7 @@ export const AppRoutes: React.FC = () => {
         <Route path="/solar/jobsheet" element={<SolarJobSheetPage />} />
         <Route path="/solar/support" element={<SolarSupportPage />} />
         <Route path="/solar/director" element={<SolarDirectorPage />} />
+        <Route path="/solar/worker-portal" element={<WorkerPortalPage />} />
 
         {/* Existing Inventory & Warehouse Management Routes */}
         <Route path="/products" element={<ProductsPage />} />

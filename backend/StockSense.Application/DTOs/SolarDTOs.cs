@@ -421,4 +421,95 @@ namespace StockSense.Application.DTOs
         string Disclaimer,
         AiRoofKerasMetadataDto KerasMetadata
     );
+
+    // Customer Ingestion & Admin AI Ingestion Dossier DTOs
+    public record CustomerAiSubmissionDto(
+        string Id,
+        int? ProjectId,
+        string? ProjectNumber,
+        string CustomerName,
+        string Phone,
+        string? Address,
+        DateTime SubmittedAt,
+        AiSolarEvaluationResponseDto? CostEstimation,
+        AiRoofPhotoAnalysisResponseDto? CameraReview,
+        string? RoofPhotoPreviewUrl,
+        string Status
+    );
+
+    public record SaveCustomerAiSubmissionDto(
+        int? ProjectId,
+        string? ProjectNumber,
+        string CustomerName,
+        string Phone,
+        string? Address,
+        AiSolarEvaluationResponseDto? CostEstimation,
+        AiRoofPhotoAnalysisResponseDto? CameraReview,
+        string? RoofPhotoPreviewUrl
+    );
+
+    // ==========================================
+    // WORKER PORTAL & FLEET TASK MANAGEMENT DTOs
+    // ==========================================
+    public record SolarWorkerDto(
+        int Id,
+        string WorkerCode,
+        string FullName,
+        string Phone,
+        string Role, // "CrewLeader", "FieldTechnician", "MasterElectrician", "SolarRoofer"
+        string Specialization,
+        string Status, // "Active", "OnField", "OnLeave"
+        int AssignedTasksCount,
+        int CompletedTasksCount,
+        double Rating,
+        DateTime JoinedAt
+    );
+
+    public record CreateSolarWorkerDto(
+        string FullName,
+        string Phone,
+        string Role,
+        string Specialization,
+        string? Email
+    );
+
+    public record WorkerTaskDto(
+        int Id,
+        string TaskCode,
+        int ProjectId,
+        string ProjectNumber,
+        string CustomerName,
+        string CustomerPhone,
+        string CustomerAddress,
+        int AssignedWorkerId,
+        string AssignedWorkerName,
+        string AssignedWorkerRole,
+        string TaskType, // "RoofMounting", "InverterWiring", "PreCommissioningAudit", "NetMeterLiaison", "SupportTicketVisit"
+        string Status, // "Assigned", "EnRoute", "InProgress", "Completed"
+        DateTime ScheduledDate,
+        double SystemCapacityKw,
+        string SystemType,
+        List<string> ChecklistItems,
+        string? Notes,
+        double? TestedKw,
+        double? TestedVoltage,
+        string? CustomerSignatureBase64,
+        DateTime? CompletedAt
+    );
+
+    public record AssignWorkerTaskDto(
+        int ProjectId,
+        int WorkerId,
+        string TaskType,
+        DateTime ScheduledDate,
+        string? Notes
+    );
+
+    public record UpdateWorkerTaskStatusDto(
+        string Status,
+        string? Notes,
+        double? TestedKw,
+        double? TestedVoltage,
+        string? CustomerSignatureBase64
+    );
 }

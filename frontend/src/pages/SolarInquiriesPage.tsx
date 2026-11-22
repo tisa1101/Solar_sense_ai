@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { solarApi } from '../services/solarApi';
-import { SolarInquiry, SiteSurvey, SolarSystemType } from '../types/solar';
+import { SolarInquiry, SiteSurvey, SolarSystemType, CustomerAiSubmission } from '../types/solar';
 import { LoadingSpinner } from '../components/CommonState';
 import {
   Sun,
@@ -14,14 +14,20 @@ import {
   UserCheck,
   FileCheck2,
   Plus,
-  X
+  X,
+  Camera,
+  Zap,
+  Sparkles,
+  Eye
 } from 'lucide-react';
 
 export const SolarInquiriesPage: React.FC = () => {
   const [inquiries, setInquiries] = useState<SolarInquiry[]>([]);
+  const [aiSubmissions, setAiSubmissions] = useState<CustomerAiSubmission[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedInquiry, setSelectedInquiry] = useState<SolarInquiry | null>(null);
   const [showSurveyModal, setShowSurveyModal] = useState(false);
+  const [autoPopulatedNotice, setAutoPopulatedNotice] = useState(false);
 
   // Survey Form State
   const [technicianName, setTechnicianName] = useState('Kiran Pawar (Senior Surveyor)');
@@ -36,8 +42,14 @@ export const SolarInquiriesPage: React.FC = () => {
   const fetchInquiries = async () => {
     try {
       setLoading(true);
-      const res = await solarApi.getInquiries();
+      const [res, aiRes] = await Promise.all([
+        solarApi.getInquiries(),
+        solarApi.getAiSubmissions().catch(() => ({ data: { data: [] } }))
+      ]);
       setInquiries(res.data.data);
+      if (aiRes.data?.data) {
+        setAiSubmissions(aiRes.data.data);
+      }
     } catch (err) {
       console.error(err);
     } finally {
@@ -49,8 +61,19 @@ export const SolarInquiriesPage: React.FC = () => {
     fetchInquiries();
   }, []);
 
+  const findMatchingAiSubmission = (inq: SolarInquiry): CustomerAiSubmission | undefined => {
+    const inqName = inq.customerName.toLowerCase().trim();
+    const inqPhone = inq.phone.replace(/\D/g, '');
+    return aiSubmissions.find(s => {
+      const sName = s.customerName.toLowerCase().trim();
+      const sPhone = s.phone.replace(/\D/g, '');
+      return sName.includes(inqName) || inqName.includes(sName) || (sPhone.length > 5 && inqPhone.length > 5 && sPhone === inqPhone);
+    });
+  };
+
   const handleOpenSurvey = (inq: SolarInquiry) => {
     setSelectedInquiry(inq);
+    setAutoPopulatedNotice(false);
     if (inq.survey) {
       setTechnicianName(inq.survey.technicianName);
       setRoofDirection(inq.survey.roofDirection);
@@ -62,6 +85,27 @@ export const SolarInquiriesPage: React.FC = () => {
       setSurveyNotes(inq.survey.notes);
     }
     setShowSurveyModal(true);
+  };
+
+  const handleAutoPopulateFromAi = () => {
+    if (!selectedInquiry) return;
+    const sub = findMatchingAiSubmission(selectedInquiry);
+    if (!sub) return;
+
+    if (sub.cameraReview) {
+      const cam = sub.cameraReview;
+      setShadingAnalysis(`${cam.shadingAnalysis?.shadingRating || 'Minimal Shading'}: ${cam.shadingAnalysis?.impactAssessment || 'High Solar Yield'} (${cam.shadingAnalysis?.estimatedShadowPercent || 3.8}% shadow)`);
+      setStructuralFeasibility(`${cam.roofType} — ${cam.loadBearingCapability}. Usable Area: ${cam.suitability?.usableAreaPercent || 85}%. Mounting: ${cam.recommendedMounting}`);
+      setRoofTiltDegrees(cam.slopeCategory?.includes('Flat') ? 15 : 22.5);
+    }
+
+    if (sub.costEstimation) {
+      const cost = sub.costEstimation;
+      setSurveyNotes(`${sub.cameraReview?.assessmentSummary || ''} AI Sizing: ${cost.recommendedCapacityKw} kW ${cost.systemType}. Net investment: ₹${cost.financials?.netCost?.toLocaleString()} with Central DBT Subsidy ₹${cost.financials?.centralSubsidy?.toLocaleString()}. Payback: ${cost.financials?.paybackYears} yrs.`);
+    }
+
+    setIsApproved(true);
+    setAutoPopulatedNotice(true);
   };
 
   const handleSaveSurvey = async (e: React.FormEvent) => {
@@ -172,6 +216,26 @@ export const SolarInquiriesPage: React.FC = () => {
                     <td className="p-3.5">
                       <p className="font-bold text-slate-900 dark:text-white">{inq.customerName}</p>
                       <p className="text-[11px] text-slate-500">{inq.phone}</p>
+                      {(() => {
+                        const sub = findMatchingAiSubmission(inq);
+                        if (!sub) return null;
+                        return (
+                          <div className="flex flex-wrap items-center gap-1.5 mt-1.5">
+                            {sub.cameraReview && (
+                              <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold text-pink-400 bg-pink-500/10 px-2 py-0.5 rounded-full border border-pink-500/25">
+                                <Camera className="w-2.5 h-2.5" />
+                                <span>Keras Vision {sub.cameraReview.suitability.score}/100</span>
+                              </span>
+                            )}
+                            {sub.costEstimation && (
+                              <span className="inline-flex items-center gap-1 text-[10px] font-mono font-bold text-purple-400 bg-purple-500/10 px-2 py-0.5 rounded-full border border-purple-500/25">
+                                <Zap className="w-2.5 h-2.5" />
+                                <span>AI {sub.costEstimation.recommendedCapacityKw} kW (₹{sub.costEstimation.financials.netCost.toLocaleString()})</span>
+                              </span>
+                            )}
+                          </div>
+                        );
+                      })()}
                     </td>
                     <td className="p-3.5">
                       <span className="font-extrabold text-slate-900 dark:text-white">{inq.systemCapacityKw} kW</span>{' '}
@@ -245,6 +309,49 @@ export const SolarInquiriesPage: React.FC = () => {
                 <X className="w-4 h-4" />
               </button>
             </div>
+
+            {(() => {
+              const sub = findMatchingAiSubmission(selectedInquiry);
+              if (!sub) return null;
+              return (
+                <div className="p-4 mx-5 mt-4 rounded-xl bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-indigo-500/10 border border-pink-500/25 space-y-2.5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-mono font-bold uppercase text-pink-400 flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5 text-pink-400" />
+                      <span>Customer Portal AI Ingestion Attached</span>
+                    </span>
+                    <span className="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">
+                      Score: {sub.cameraReview?.suitability?.score || 94}/100
+                    </span>
+                  </div>
+
+                  <p className="text-xs text-slate-300">
+                    Customer uploaded a rooftop photograph and calculated their {sub.costEstimation?.recommendedCapacityKw || 3.3} kW {sub.costEstimation?.systemType || 'On-Grid'} system on the Customer Portal.
+                  </p>
+
+                  <div className="flex flex-wrap items-center justify-between gap-2 pt-1">
+                    <span className="text-[11px] font-mono text-purple-300">
+                      Material: {sub.cameraReview?.roofType || 'Flat RCC'} · Shadow: {sub.cameraReview?.shadingAnalysis?.estimatedShadowPercent || 3.8}%
+                    </span>
+                    <button
+                      type="button"
+                      onClick={handleAutoPopulateFromAi}
+                      className="px-3 py-1.5 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 hover:brightness-110 text-white font-mono text-xs font-bold shadow-md flex items-center gap-1.5 cursor-pointer transition-all"
+                    >
+                      <Zap className="w-3 h-3" />
+                      <span>Auto-Populate Survey from AI Review ✦</span>
+                    </button>
+                  </div>
+
+                  {autoPopulatedNotice && (
+                    <div className="p-2 rounded-lg bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-mono flex items-center gap-1.5 animate-in fade-in">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                      <span>Tilt, shading loss, load-bearing capability &amp; AI sizing notes populated successfully!</span>
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
 
             <form onSubmit={handleSaveSurvey} className="p-5 space-y-4 text-xs">
               <div>

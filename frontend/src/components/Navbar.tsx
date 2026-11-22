@@ -3,7 +3,7 @@ import { useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useTheme } from '../context/ThemeContext';
 import { UserRole } from '../types';
-import { ShieldCheck, Sun, Moon, ExternalLink, Activity, Palette } from 'lucide-react';
+import { ShieldCheck, Sun, Moon, ExternalLink, Activity, Palette, HardHat } from 'lucide-react';
 import { NotificationBell } from './NotificationBell';
 import { useThemeEngine } from '../context/ThemeEngineContext';
 
@@ -14,6 +14,7 @@ export const Navbar: React.FC = () => {
   const { toggleStudio } = useThemeEngine();
 
   const getPageTitle = (path: string) => {
+    if (path.startsWith('/workers') || path.startsWith('/solar/worker-portal')) return '👷 Workers & Field Crew Portal';
     if (path.startsWith('/solar/inquiries')) return 'Scene 1: Rooftop Inquiries & Feasibility Survey';
     if (path.startsWith('/solar/packages')) return 'Scene 2: Ready Solar Kits & Automated BOM Builder';
     if (path.startsWith('/solar/dispatch')) return 'Scene 3: Warehouse Dispatch & Serial Number Clocks';
@@ -68,6 +69,15 @@ export const Navbar: React.FC = () => {
           <span className="hidden md:inline">MIRA Studio</span>
           <span className="text-[10px] bg-[#FF2E93]/20 text-[#FF2E93] px-1.5 py-0.2 rounded-full border border-[#FF2E93]/30">6</span>
         </button>
+
+        {/* Workers & Field Crew Portal Shortcut */}
+        <Link
+          to="/workers"
+          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-pink-500/20 via-purple-600/20 to-indigo-600/20 hover:from-pink-500/30 hover:to-purple-600/30 border border-pink-500/35 text-pink-200 text-xs font-mono font-bold uppercase tracking-wider shadow-[0_2px_14px_rgba(236,72,153,0.25)] transition-all hover:scale-105"
+        >
+          <HardHat className="w-3.5 h-3.5 text-pink-400" />
+          <span>Workers Portal</span>
+        </Link>
 
         {/* Customer Portal Shortcut */}
         <Link

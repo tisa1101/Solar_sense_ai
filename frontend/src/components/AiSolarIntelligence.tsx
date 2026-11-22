@@ -101,6 +101,14 @@ export const AiSolarIntelligence: React.FC<AiSolarIntelligenceProps> = ({
       const res = await solarApi.evaluateAiSolar(req);
       if (res.data?.data) {
         setEvaluation(res.data.data);
+        // Automatically sync customer estimation to Admin Operations Matrix
+        solarApi.saveAiSubmission({
+          customerName: customerName || 'Prospective Homeowner',
+          projectNumber: projectNumber !== 'PRJ-AI-2026' ? projectNumber : undefined,
+          phone: localStorage.getItem('customer_phone') || '+91 98220 12345',
+          address: 'Pune, Maharashtra',
+          costEstimation: res.data.data
+        }).catch((e) => console.warn('Customer AI cost sync notice:', e));
       }
     } catch (err: any) {
       console.error('Failed to run AI Solar Evaluation', err);

@@ -36,5 +36,17 @@ namespace StockSense.Application.Interfaces
         Task<AiSolarEvaluationResponseDto> EvaluateSolarIntelligenceAsync(AiSolarEvaluationRequestDto request);
         Task<AiSolarChatResponseDto> ChatSolarAssistantAsync(AiSolarChatRequestDto request);
         Task<AiRoofPhotoAnalysisResponseDto> AnalyzeRoofPhotoAsync(AiRoofPhotoRequestDto request);
+
+        // Customer Portal AI Ingestion & Admin Matrix
+        Task<List<CustomerAiSubmissionDto>> GetCustomerAiSubmissionsAsync();
+        Task<CustomerAiSubmissionDto?> GetCustomerAiSubmissionAsync(string identifier);
+        Task<CustomerAiSubmissionDto> SaveCustomerAiSubmissionAsync(SaveCustomerAiSubmissionDto dto);
+
+        // Worker Portal & Fleet Task Management
+        Task<List<SolarWorkerDto>> GetWorkersAsync();
+        Task<SolarWorkerDto> CreateWorkerAsync(CreateSolarWorkerDto dto);
+        Task<List<WorkerTaskDto>> GetWorkerTasksAsync(int? workerId = null);
+        Task<WorkerTaskDto> AssignWorkerTaskAsync(AssignWorkerTaskDto dto);
+        Task<WorkerTaskDto> UpdateWorkerTaskStatusAsync(int taskId, UpdateWorkerTaskStatusDto dto);
     }
 }

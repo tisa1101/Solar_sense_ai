@@ -355,4 +355,98 @@ export interface AiRoofPhotoAnalysisResponse {
   kerasMetadata: AiRoofKerasMetadata;
 }
 
+// ==========================================
+// Customer AI Ingestion & Admin Matrix
+// ==========================================
+export interface CustomerAiSubmission {
+  id: string;
+  projectId?: number;
+  projectNumber?: string;
+  customerName: string;
+  phone: string;
+  address?: string;
+  submittedAt: string;
+  costEstimation?: AiSolarEvaluationResponse;
+  cameraReview?: AiRoofPhotoAnalysisResponse;
+  roofPhotoPreviewUrl?: string;
+  status: string;
+}
+
+export interface SaveCustomerAiSubmission {
+  projectId?: number;
+  projectNumber?: string;
+  customerName?: string;
+  phone?: string;
+  address?: string;
+  costEstimation?: AiSolarEvaluationResponse;
+  cameraReview?: AiRoofPhotoAnalysisResponse;
+  roofPhotoPreviewUrl?: string;
+}
+
+// ==========================================
+// Worker Portal & Fleet Task Management
+// ==========================================
+export interface SolarWorker {
+  id: number;
+  workerCode: string;
+  fullName: string;
+  phone: string;
+  role: 'CrewLeader' | 'FieldTechnician' | 'MasterElectrician' | 'SolarRoofer';
+  specialization: string;
+  status: 'Active' | 'OnField' | 'OnLeave';
+  assignedTasksCount: number;
+  completedTasksCount: number;
+  rating: number;
+  joinedAt: string;
+}
+
+export interface CreateSolarWorker {
+  fullName: string;
+  phone: string;
+  role: string;
+  specialization: string;
+  email?: string;
+}
+
+export interface WorkerTask {
+  id: number;
+  taskCode: string;
+  projectId: number;
+  projectNumber: string;
+  customerName: string;
+  customerPhone: string;
+  customerAddress: string;
+  assignedWorkerId: number;
+  assignedWorkerName: string;
+  assignedWorkerRole: string;
+  taskType: 'RoofMounting' | 'InverterWiring' | 'PreCommissioningAudit' | 'NetMeterLiaison' | 'SupportTicketVisit';
+  status: 'Assigned' | 'EnRoute' | 'InProgress' | 'Completed';
+  scheduledDate: string;
+  systemCapacityKw: number;
+  systemType: string;
+  checklistItems: string[];
+  notes?: string;
+  testedKw?: number;
+  testedVoltage?: number;
+  customerSignatureBase64?: string;
+  completedAt?: string;
+}
+
+export interface AssignWorkerTask {
+  projectId: number;
+  workerId: number;
+  taskType: string;
+  scheduledDate: string;
+  notes?: string;
+}
+
+export interface UpdateWorkerTaskStatus {
+  status: string;
+  notes?: string;
+  testedKw?: number;
+  testedVoltage?: number;
+  customerSignatureBase64?: string;
+}
+
+
 

@@ -14,6 +14,13 @@ import {
   AiSolarChatRequest,
   AiSolarChatResponse,
   AiRoofPhotoAnalysisResponse,
+  CustomerAiSubmission,
+  SaveCustomerAiSubmission,
+  SolarWorker,
+  CreateSolarWorker,
+  WorkerTask,
+  AssignWorkerTask,
+  UpdateWorkerTaskStatus,
 } from '../types/solar';
 
 export const solarApi = {
@@ -106,4 +113,30 @@ export const solarApi = {
   // AI Roof Photo Intelligence (Keras Vision Model)
   analyzeRoofPhoto: (payload: { image: string; filename?: string }) =>
     api.post<{ data: AiRoofPhotoAnalysisResponse }>('/solar/ai/roof-photo', payload),
+
+  // Customer AI Ingestion & Admin Matrix
+  getAiSubmissions: () =>
+    api.get<{ data: CustomerAiSubmission[] }>('/solar/ai/submissions'),
+
+  getAiSubmission: (identifier: string) =>
+    api.get<{ data: CustomerAiSubmission }>(`/solar/ai/submissions/${encodeURIComponent(identifier)}`),
+
+  saveAiSubmission: (payload: SaveCustomerAiSubmission) =>
+    api.post<{ data: CustomerAiSubmission }>('/solar/ai/submissions', payload),
+
+  // Worker Portal & Fleet Task Management
+  getWorkers: () =>
+    api.get<{ data: SolarWorker[] }>('/solar/workers'),
+
+  createWorker: (payload: CreateSolarWorker) =>
+    api.post<{ data: SolarWorker }>('/solar/workers', payload),
+
+  getWorkerTasks: (workerId?: number) =>
+    api.get<{ data: WorkerTask[] }>(workerId ? `/solar/workers/tasks?workerId=${workerId}` : '/solar/workers/tasks'),
+
+  assignWorkerTask: (payload: AssignWorkerTask) =>
+    api.post<{ data: WorkerTask }>('/solar/workers/tasks/assign', payload),
+
+  updateWorkerTaskStatus: (taskId: number, payload: UpdateWorkerTaskStatus) =>
+    api.put<{ data: WorkerTask }>(`/solar/workers/tasks/${taskId}/status`, payload),
 };

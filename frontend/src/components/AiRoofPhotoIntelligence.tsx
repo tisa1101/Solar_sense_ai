@@ -93,6 +93,14 @@ export const AiRoofPhotoIntelligence: React.FC<AiRoofPhotoIntelligenceProps> = (
 
       if (res.data?.data) {
         setAnalysis(res.data.data);
+        // Automatically sync customer roof camera review to Admin Operations Matrix
+        solarApi.saveAiSubmission({
+          customerName: customerName || 'Rajesh Sharma',
+          projectNumber: projectNumber !== 'PRJ-ROOF-2026' ? projectNumber : undefined,
+          phone: localStorage.getItem('customer_phone') || '+91 98220 12345',
+          cameraReview: res.data.data,
+          roofPhotoPreviewUrl: base64Img.length < 500000 ? base64Img : undefined
+        }).catch((e) => console.warn('Customer AI camera sync notice:', e));
       }
     } catch (err: any) {
       console.error('Roof photo analysis failed:', err);
