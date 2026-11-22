@@ -250,15 +250,14 @@ export const CustomerPortalPage: React.FC = () => {
                 <select
                   value={project?.projectId}
                   onChange={(e) => handleSwitchProject(Number(e.target.value))}
-                  className="px-4 py-2 pr-9 cursor-pointer appearance-none bg-white/[0.06] backdrop-blur-xl text-white border border-white/15 rounded-full text-xs font-semibold uppercase focus:border-[#E284B3] focus:outline-none transition-all"
+                  className="ti-select cursor-pointer text-xs font-semibold uppercase tracking-wider py-2 pl-3.5 pr-8"
                 >
                   {allProjects.map((p, idx) => (
-                    <option key={p.projectId} value={p.projectId} className="bg-[#140F22] text-white py-2">
+                    <option key={p.projectId} value={p.projectId} className="bg-[#0E0A18] text-white py-2">
                       0{idx + 1} // {p.customerName.toUpperCase()} — {p.systemCapacityKw}KW
                     </option>
                   ))}
                 </select>
-                <ChevronDown className="w-3.5 h-3.5 text-[#F4A5C6] absolute right-3 top-3 pointer-events-none" />
               </div>
             </div>
 

@@ -436,14 +436,14 @@ export const DashboardPage: React.FC = () => {
           </span>
         </div>
 
-        {/* Dynamic Filters Bar */}
+        {/* Dynamic Filters Bar (Clean Dropdowns matching reference photo) */}
         <div className="p-4 border-b border-white/10 flex flex-wrap items-center gap-3 bg-white/[0.02]">
           <div className="flex items-center gap-2">
-            <label className="text-[10px] font-mono font-bold text-[#F69125] uppercase tracking-wider">TYPE:</label>
+            <label className="text-[11px] font-medium text-[#A79FB6] uppercase tracking-wider">TYPE:</label>
             <select
               value={docTypeFilter}
               onChange={(e) => setDocTypeFilter(e.target.value)}
-              className="ti-select cursor-pointer"
+              className="ti-select cursor-pointer py-2 pl-3.5 pr-8 text-xs"
             >
               <option value="all">ALL DOCUMENTS (RECEIPTS, DELIVERY, INTERNAL, ADJUSTMENTS)</option>
               <option value="receipt">RECEIPTS (INCOMING STOCK)</option>
@@ -454,11 +454,11 @@ export const DashboardPage: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            <label className="text-[10px] font-mono font-bold text-[#F69125] uppercase tracking-wider">STATUS:</label>
+            <label className="text-[11px] font-medium text-[#A79FB6] uppercase tracking-wider">STATUS:</label>
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="ti-select cursor-pointer"
+              className="ti-select cursor-pointer py-2 pl-3.5 pr-8 text-xs"
             >
               <option value="all">ALL STATUSES</option>
               <option value="1">DRAFT</option>
@@ -470,11 +470,11 @@ export const DashboardPage: React.FC = () => {
           </div>
 
           <div className="flex items-center gap-2">
-            <label className="text-[10px] font-mono font-bold text-[#F69125] uppercase tracking-wider">LOCATION:</label>
+            <label className="text-[11px] font-medium text-[#A79FB6] uppercase tracking-wider">LOCATION:</label>
             <select
               value={warehouseFilter}
               onChange={(e) => setWarehouseFilter(e.target.value)}
-              className="ti-select cursor-pointer"
+              className="ti-select cursor-pointer py-2 pl-3.5 pr-8 text-xs"
             >
               <option value="all">ALL WAREHOUSES / LOCATIONS</option>
               {warehouses.map((w) => (
@@ -486,13 +486,13 @@ export const DashboardPage: React.FC = () => {
           </div>
 
           <div className="relative flex-1 min-w-[200px]">
-            <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-3" />
+            <Search className="w-3.5 h-3.5 text-[#A79FB6] absolute left-3.5 top-3 pointer-events-none" />
             <input
               type="text"
               placeholder="SEARCH REFERENCE # OR LOCATION..."
               value={opSearch}
               onChange={(e) => setOpSearch(e.target.value)}
-              className="ti-input w-full pl-9"
+              className="ti-input w-full pl-9 py-2 text-xs"
             />
           </div>
         </div>

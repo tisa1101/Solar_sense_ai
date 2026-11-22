@@ -271,18 +271,28 @@ export const AiSolarIntelligence: React.FC<AiSolarIntelligenceProps> = ({
 
               {/* Exact Monthly Units (kWh) Optional */}
               <div>
-                <label className="block text-xs text-[#D5CEE0] font-['Space_Mono',monospace] uppercase tracking-wider mb-1.5">
-                  Monthly Consumption (Optional)
-                </label>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="text-xs text-[#D5CEE0] font-medium tracking-wide">
+                    Monthly Consumption (Optional)
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => setUnitsKwh(Math.round(bill / 8.5))}
+                    className="inline-flex items-center gap-1 text-[11px] font-medium text-[#F4A5C6] hover:text-white transition-colors cursor-pointer"
+                  >
+                    <Sparkles className="w-3 h-3 text-[#E284B3]" />
+                    <span>Auto-derive with AI</span>
+                  </button>
+                </div>
                 <div className="relative">
                   <input
                     type="number"
                     placeholder={`Auto-derived (~${Math.round(bill / 8.5)} kWh)`}
                     value={unitsKwh}
                     onChange={(e) => setUnitsKwh(e.target.value === '' ? '' : Number(e.target.value))}
-                    className="w-full bg-white/[0.04] text-white border border-white/10 rounded-2xl px-3.5 py-2.5 text-xs font-['Space_Mono',monospace] focus:border-[#E284B3] focus:outline-none backdrop-blur-xl"
+                    className="ti-input w-full pr-20 text-xs"
                   />
-                  <span className="absolute right-3.5 top-2.5 text-[10px] text-[#A79FB6] font-['Space_Mono',monospace]">
+                  <span className="absolute right-3.5 top-2.5 text-[10px] text-[#A79FB6] font-['Space_Mono',monospace] pointer-events-none">
                     KWH / MO
                   </span>
                 </div>
@@ -314,71 +324,71 @@ export const AiSolarIntelligence: React.FC<AiSolarIntelligenceProps> = ({
                 </div>
               </div>
 
-              {/* Property Type Selector */}
+              {/* Property Type Selector (Clean Dropdown matching photo) */}
               <div>
-                <label className="block text-xs text-[#D5CEE0] font-['Space_Mono',monospace] uppercase tracking-wider mb-1.5">
+                <label className="block text-xs text-[#D5CEE0] font-medium tracking-wide mb-1.5">
                   Property Structure
                 </label>
                 <select
                   value={propertyType}
                   onChange={(e) => setPropertyType(e.target.value)}
-                  className="w-full bg-white/[0.04] text-white border border-white/10 rounded-2xl px-3.5 py-2.5 text-xs font-['Space_Mono',monospace] focus:border-[#E284B3] focus:outline-none cursor-pointer backdrop-blur-xl"
+                  className="ti-select w-full"
                 >
-                  <option value="Independent Villa" className="bg-[#0D0917] text-white">Independent Villa / Bungalow</option>
-                  <option value="Row House" className="bg-[#0D0917] text-white">Duplex / Row House</option>
-                  <option value="Apartment Penthouse" className="bg-[#0D0917] text-white">Apartment Penthouse / Top Floor</option>
-                  <option value="Commercial Shop" className="bg-[#0D0917] text-white">Commercial Establishment / Office</option>
-                  <option value="Farmhouse" className="bg-[#0D0917] text-white">Farmhouse / Rural Estate</option>
+                  <option value="Independent Villa">Independent Villa / Bungalow</option>
+                  <option value="Row House">Duplex / Row House</option>
+                  <option value="Apartment Penthouse">Apartment Penthouse / Top Floor</option>
+                  <option value="Commercial Shop">Commercial Establishment / Office</option>
+                  <option value="Farmhouse">Farmhouse / Rural Estate</option>
                 </select>
               </div>
 
-              {/* Roof Surface Type */}
+              {/* Roof Surface Type (Clean Dropdown matching photo) */}
               <div>
-                <label className="block text-xs text-[#D5CEE0] font-['Space_Mono',monospace] uppercase tracking-wider mb-1.5">
+                <label className="block text-xs text-[#D5CEE0] font-medium tracking-wide mb-1.5">
                   Roof Surface Architecture
                 </label>
                 <select
                   value={roofType}
                   onChange={(e) => setRoofType(e.target.value)}
-                  className="w-full bg-white/[0.04] text-white border border-white/10 rounded-2xl px-3.5 py-2.5 text-xs font-['Space_Mono',monospace] focus:border-[#E284B3] focus:outline-none cursor-pointer backdrop-blur-xl"
+                  className="ti-select w-full"
                 >
-                  <option value="Flat Concrete RCC" className="bg-[#0D0917] text-white">Flat Concrete (RCC)</option>
-                  <option value="Sloped Metal Shed" className="bg-[#0D0917] text-white">Sloped Metal Sheet (Trapezoidal)</option>
-                  <option value="Clay Tile Shingle" className="bg-[#0D0917] text-white">Clay Tile / Terracotta Shingle</option>
-                  <option value="Elevated Gazebo Frame" className="bg-[#0D0917] text-white">Elevated Terrace Gazebo (Superstructure)</option>
+                  <option value="Flat Concrete RCC">Flat Concrete (RCC)</option>
+                  <option value="Sloped Metal Shed">Sloped Metal Sheet (Trapezoidal)</option>
+                  <option value="Clay Tile Shingle">Clay Tile / Terracotta Shingle</option>
+                  <option value="Elevated Gazebo Frame">Elevated Terrace Gazebo (Superstructure)</option>
                 </select>
               </div>
 
-              {/* Shadow Obstructions */}
+              {/* Shadow Obstructions (Clean Dropdown matching photo) */}
               <div>
-                <label className="block text-xs text-[#D5CEE0] font-['Space_Mono',monospace] uppercase tracking-wider mb-1.5">
+                <label className="block text-xs text-[#D5CEE0] font-medium tracking-wide mb-1.5">
                   Shading &amp; Surroundings
                 </label>
                 <select
                   value={shadowObstructions}
                   onChange={(e) => setShadowObstructions(e.target.value)}
-                  className="w-full bg-white/[0.04] text-white border border-white/10 rounded-2xl px-3.5 py-2.5 text-xs font-['Space_Mono',monospace] focus:border-[#E284B3] focus:outline-none cursor-pointer backdrop-blur-xl"
+                  className="ti-select w-full"
                 >
-                  <option value="None (Clear Sun Exposure)" className="bg-[#0D0917] text-white">None (Unobstructed 100% Sky View)</option>
-                  <option value="Partial (Water Tank / Parapet)" className="bg-[#0D0917] text-white">Partial (Water Tank / Parapet Wall)</option>
-                  <option value="Neighbor Trees / High-rise" className="bg-[#0D0917] text-white">Significant (Tall Trees / Adjacent Building)</option>
+                  <option value="None (Clear Sun Exposure)">None (Unobstructed 100% Sky View)</option>
+                  <option value="Partial (Water Tank / Parapet)">Partial (Water Tank / Parapet Wall)</option>
+                  <option value="Neighbor Trees / High-rise">Significant (Tall Trees / Adjacent Building)</option>
                 </select>
               </div>
 
-              {/* Grid Power Cuts Frequency */}
+              {/* Grid Power Cuts Frequency (Clean Dropdown matching photo) */}
               <div>
-                <label className="block text-xs text-[#D5CEE0] font-['Space_Mono',monospace] uppercase tracking-wider mb-1.5">
+                <label className="block text-xs text-[#D5CEE0] font-medium tracking-wide mb-1.5">
                   Grid Outage Frequency
                 </label>
                 <select
                   value={powerCuts}
                   onChange={(e) => setPowerCuts(e.target.value)}
-                  className="w-full bg-white/[0.04] text-white border border-white/10 rounded-2xl px-3.5 py-2.5 text-xs font-['Space_Mono',monospace] focus:border-[#E284B3] focus:outline-none cursor-pointer backdrop-blur-xl"
+                  className="ti-select w-full"
                 >
-                  <option value="Rare / None" className="bg-[#0D0917] text-white">Stable Grid (Outages &lt; 30 mins / month)</option>
-                  <option value="Moderate (1 - 3 hours daily)" className="bg-[#0D0917] text-white">Moderate Cuts (1 - 3 hours daily)</option>
-                  <option value="Frequent (> 4 hours daily)" className="bg-[#0D0917] text-white">Severe Cuts (&gt; 4 hours daily / Unreliable)</option>
-                  <option value="No Grid Access" className="bg-[#0D0917] text-white">No Grid Connection (Zero DISCOM Line)</option>
+                  <option value="Rare / None">Stable Grid (Outages &lt; 30 mins / month)</option>
+                  <option value="Moderate (1 - 3 hours daily)">Moderate Cuts (1 - 3 hours daily)</option>
+                  <option value="Frequent (> 4 hours daily)">Severe Cuts (&gt; 4 hours daily / Unreliable)</option>
+                  <option value="No Grid Access">No Grid Connection (Zero DISCOM Line)</option>
                 </select>
               </div>
 
@@ -461,9 +471,9 @@ export const AiSolarIntelligence: React.FC<AiSolarIntelligenceProps> = ({
 
               {/* Quick Input fields for Missing Information */}
               <div className="pt-2 border-t border-white/10 space-y-3">
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-2.5">
                   <div>
-                    <label className="text-[10px] text-[#A79FB6] font-['Space_Mono',monospace] uppercase block mb-1">
+                    <label className="text-[10px] text-[#A79FB6] font-medium uppercase block mb-1">
                       Sanctioned Load (kW)
                     </label>
                     <input
@@ -471,11 +481,11 @@ export const AiSolarIntelligence: React.FC<AiSolarIntelligenceProps> = ({
                       placeholder="e.g. 5"
                       value={sanctionedLoad}
                       onChange={(e) => setSanctionedLoad(e.target.value === '' ? '' : Number(e.target.value))}
-                      className="w-full bg-white/[0.04] text-white border border-white/10 rounded-xl px-3 py-1.5 text-xs font-['Space_Mono',monospace] focus:border-[#E284B3] focus:outline-none backdrop-blur-xl"
+                      className="ti-input w-full text-xs"
                     />
                   </div>
                   <div>
-                    <label className="text-[10px] text-[#A79FB6] font-['Space_Mono',monospace] uppercase block mb-1">
+                    <label className="text-[10px] text-[#A79FB6] font-medium uppercase block mb-1">
                       DISCOM Provider
                     </label>
                     <input
@@ -483,13 +493,13 @@ export const AiSolarIntelligence: React.FC<AiSolarIntelligenceProps> = ({
                       placeholder="e.g. BSES / TPDDL / MSEDCL"
                       value={discomName}
                       onChange={(e) => setDiscomName(e.target.value)}
-                      className="w-full bg-white/[0.04] text-white border border-white/10 rounded-xl px-3 py-1.5 text-xs font-['Space_Mono',monospace] focus:border-[#E284B3] focus:outline-none backdrop-blur-xl"
+                      className="ti-input w-full text-xs"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="text-[10px] text-[#A79FB6] font-['Space_Mono',monospace] uppercase block mb-1">
+                  <label className="text-[10px] text-[#A79FB6] font-medium uppercase block mb-1">
                     Roof Azimuth / Tilt
                   </label>
                   <input
@@ -497,7 +507,7 @@ export const AiSolarIntelligence: React.FC<AiSolarIntelligenceProps> = ({
                     placeholder="e.g. South 180° / 15° Tilt"
                     value={roofOrientation}
                     onChange={(e) => setRoofOrientation(e.target.value)}
-                    className="w-full bg-white/[0.04] text-white border border-white/10 rounded-xl px-3 py-1.5 text-xs font-['Space_Mono',monospace] focus:border-[#E284B3] focus:outline-none backdrop-blur-xl"
+                    className="ti-input w-full text-xs"
                   />
                 </div>
               </div>

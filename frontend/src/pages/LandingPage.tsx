@@ -1,77 +1,59 @@
 ﻿import React, { useEffect } from 'react';
 import { LandingNavbar } from '../landing/LandingNavbar';
-import { Hero } from '../landing/Hero';
-import { Metrics } from '../landing/Metrics';
-import { SolarTelemetryTerminal } from '../components/ui/SolarTelemetryTerminal';
-import { FluidCursor } from '../components/ui/FluidCursor';
-import { LightingCursor } from '../components/ui/LightingCursor';
+import { PostMasterHero } from '../landing/PostMasterHero';
+import { PostMasterThreeSteps } from '../landing/PostMasterThreeSteps';
 import { SolutionMatrix } from '../landing/SolutionMatrix';
 import { ArchitecturalCutaway } from '../landing/ArchitecturalCutaway';
 import { ROICalculator } from '../landing/ROICalculator';
 import { SolarFinancingMatrix } from '../landing/SolarFinancingMatrix';
-import { ProblemSolution } from '../landing/ProblemSolution';
-import { FeatureGrid } from '../landing/FeatureGrid';
-import { IndustrySolutions } from '../landing/IndustrySolutions';
-import { CommercialArrayShowcase } from '../landing/CommercialArrayShowcase';
-import { AICopilot } from '../landing/AICopilot';
-import { HowItWorks } from '../landing/HowItWorks';
-import { SupplyChain } from '../landing/SupplyChain';
-import { IntegrationsEcosystem } from '../landing/IntegrationsEcosystem';
-import { AnalyticsPreview } from '../landing/AnalyticsPreview';
-import { BeforeAfter } from '../landing/BeforeAfter';
-import { Pricing } from '../landing/Pricing';
-import { CTASection } from '../landing/CTASection';
+import { PostMasterCTA } from '../landing/PostMasterCTA';
 import { LandingFooter } from '../landing/LandingFooter';
 
 export const LandingPage: React.FC = () => {
   useEffect(() => {
-    // Force dark background for landing page
+    // Set deep dark background
     document.documentElement.classList.add('dark');
-    document.body.style.backgroundColor = '#030712';
+    document.body.style.backgroundColor = '#07040E';
     return () => {
       document.body.style.backgroundColor = '';
     };
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#030712] text-white overflow-x-hidden relative">
-      {/* Interactive WebGL Fluid Splash Cursor from Malekverse */}
-      <FluidCursor />
-      {/* Volumetric Cursor Glow */}
-      <LightingCursor />
-
+    <div className="min-h-screen bg-[#07040E] text-white overflow-x-hidden relative font-sans selection:bg-[#E284B3]/30 selection:text-white">
+      {/* Top Post Master Navigation */}
       <LandingNavbar />
-      <Hero />
-      <Metrics />
 
-      {/* Live System Handshake Terminal (Aceternity / Malekverse Style) */}
-      <section className="py-12 bg-[#080B11] border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="text-center mb-6">
-            <span className="text-[11px] font-mono uppercase tracking-widest text-emerald-400 font-bold px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20">
-              FIELD COMMUNICATION TELEMETRY BUS
-            </span>
-          </div>
-          <SolarTelemetryTerminal />
-        </div>
+      {/* Hero Experience (Image 3 + Image 2) */}
+      <PostMasterHero />
+
+      {/* 3-Step Systematic Workflow (Image 3) */}
+      <PostMasterThreeSteps />
+
+      {/* Interactive Financial & Energy Simulation Tools */}
+      <section id="roi-calculator" className="py-20 bg-[#090514]/80 border-t border-white/5">
+        <ROICalculator />
       </section>
 
-      <SolutionMatrix />
-      <ArchitecturalCutaway />
-      <ROICalculator />
-      <SolarFinancingMatrix />
-      <ProblemSolution />
-      <FeatureGrid />
-      <IndustrySolutions />
-      <CommercialArrayShowcase />
-      <AICopilot />
-      <HowItWorks />
-      <SupplyChain />
-      <IntegrationsEcosystem />
-      <AnalyticsPreview />
-      <BeforeAfter />
-      <Pricing />
-      <CTASection />
+      {/* Architectural Cutaway (SafeDC Physical Engineering) */}
+      <section id="architecture" className="py-20 bg-[#07040E] border-t border-white/5">
+        <ArchitecturalCutaway />
+      </section>
+
+      {/* Solar Financing Matrix */}
+      <section className="py-20 bg-[#090514]/80 border-t border-white/5">
+        <SolarFinancingMatrix />
+      </section>
+
+      {/* Engineering Solution Matrix */}
+      <section id="solution-matrix" className="py-20 bg-[#07040E] border-t border-white/5">
+        <SolutionMatrix />
+      </section>
+
+      {/* Bottom Post Master Call to Action (Image 3) */}
+      <PostMasterCTA />
+
+      {/* Clean Post Master Multi-Column Footer */}
       <LandingFooter />
     </div>
   );
